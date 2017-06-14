@@ -1,5 +1,6 @@
 .DS_Store
 *.swp
 *backup*
+img/
 node_modules/
 dist/
