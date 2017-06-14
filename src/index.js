@@ -1,8 +1,8 @@
 // index.js
 'use strict';
-import { Component } from 'react';
+import React from 'react';
 
-class HeaderBar extends Component {
+class HeaderBar extends React.Component {
     constructor(props) {
         super(props);
     }
