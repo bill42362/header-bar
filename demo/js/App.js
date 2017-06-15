@@ -13,6 +13,8 @@ var onReadyStateChange = function onReadyStateChange(e) {
                 >
                     <a href='//media.pbplus.me' data-color='rgb(64, 124, 156)' data-match='media.pbplus.me'>運動專欄</a>
                     <a href='//localhost' data-color='rgb(226, 147, 192)' data-match='local(.*)'>圓夢</a>
+                    <a href='//facebook.com' data-subnav={true}><img src='/img/facebook.svg'/></a>
+                    <a href='//youtube.com' data-subnav={true}><img src='/img/youtube.svg'/></a>
                 </HeaderBar>
             </div>,
             document.getElementById('app-root')

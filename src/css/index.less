@@ -28,10 +28,9 @@ div.header-bar {
         height: 20px;
         width: auto;
     }
-    nav {
+    nav.header-bar-nav {
         flex: auto;
         div.header-bar-nav-item {
-            flex: none;
             display: inline-block;
             margin-right: 20px;
             height: @headerBarHeight - 3px;
@@ -45,6 +44,15 @@ div.header-bar {
                 transition: color .6s ease;
                 &:hover { font-weight: 400; }
             }
+        }
+    }
+    nav.header-bar-subnav {
+        flex: none;
+        div.header-bar-subnav-item {
+            display: inline-block;
+            margin-left: 20px;
+            height: 100%;
+            color: white;
         }
     }
 }
