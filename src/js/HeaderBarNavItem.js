@@ -20,7 +20,6 @@ class HeaderBarNavItem extends React.Component {
         const matchedLocation = location.href.match(child.props['data-match']);
         if(matchedLocation) { itemStyle.backgroundColor = child.props['data-color']; }
         if(isHovered && !matchedLocation) { itemStyle.color = child.props['data-color']; }
-        if(isHovered) { itemStyle.fontWeight = '500'; }
         let content = child;
         switch(child.type) {
             case 'a':

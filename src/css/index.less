@@ -14,9 +14,11 @@ div.header-bar {
     position: absolute;
     display: flex;
     background-color: black;
-    height: 40px; width: 100%;
+    height: @headerBarHeight; width: 100%;
     top: 0px; left: 0px;
     font-family: Noto Sans TC, LiHei Pro, Microsoft JhengHei, Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-weight: 300;
+    letter-spacing: 2px;
     color: white;
     overflow: hidden;
     img.header-bar-logo {
@@ -41,6 +43,7 @@ div.header-bar {
                 color: inherit;
                 line-height: @headerBarHeight - 3px;
                 transition: color .6s ease;
+                &:hover { font-weight: 400; }
             }
         }
     }
