@@ -4,6 +4,7 @@ const Express = require('express');
 
 const App = function() {};
 App.expressStaticRoutes = [
+    {path: '/fonts/', serverPath: '/dist/fonts'},
     {path: '/img/', serverPath: '/dist/img'},
     {path: '/css/', serverPath: '/dist/css'},
     {path: '/js/', serverPath: '/dist/js'},

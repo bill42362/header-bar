@@ -1,6 +1,6 @@
 // App.js
 'use strict'
-import HeaderBar from '../../src/index.js';
+import HeaderBar from '../../src/js/index.js';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
