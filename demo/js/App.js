@@ -11,8 +11,8 @@ var onReadyStateChange = function onReadyStateChange(e) {
                 <HeaderBar
                     logo={{ src:'/img/logo.svg', title:'LOGO' }}
                 >
-                    <a href='media.pbplus.me' data-color='mistyrose'>運動專欄</a>
-                    <a href='localhost' data-color='skyblue'>圓夢</a>
+                    <a href='//media.pbplus.me' data-color='mistyrose' data-match='media.pbplus.me'>運動專欄</a>
+                    <a href='//localhost' data-color='skyblue' data-match='local(.*)'>圓夢</a>
                 </HeaderBar>
             </div>,
             document.getElementById('app-root')
