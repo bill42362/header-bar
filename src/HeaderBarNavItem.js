@@ -19,10 +19,8 @@ class HeaderBarNavItem extends React.Component {
         };
         const matchedLocation = location.href.match(child.props['data-match']);
         if(matchedLocation) { itemStyle.backgroundColor = child.props['data-color']; }
-        if(isHovered && !matchedLocation) {
-            itemStyle.color = child.props['data-color'];
-            itemStyle.fontWeight = '500';
-        }
+        if(isHovered && !matchedLocation) { itemStyle.color = child.props['data-color']; }
+        if(isHovered) { itemStyle.fontWeight = '500'; }
         let content = child;
         switch(child.type) {
             case 'a':
@@ -33,6 +31,8 @@ class HeaderBarNavItem extends React.Component {
             className='header-bar-nav-item' style={itemStyle}
             onMouseEnter={this.onMouseEnter}
             onMouseLeave={this.onMouseLeave}
+            onFocus={this.onMouseEnter}
+            onBlur={this.onMouseLeave}
         >{content}</div>;
     }
 }

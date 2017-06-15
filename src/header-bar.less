@@ -4,8 +4,11 @@ div.header-bar {
     a {
         text-decoration: none;
         &:hover { text-decoration: none; }
-        &:focus { text-decoration: none; }
         &:visited { text-decoration: none; }
+        &:focus {
+            outline: none;
+            text-decoration: none;
+        }
     }
     position: absolute;
     display: flex;
