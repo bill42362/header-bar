@@ -16,8 +16,19 @@ class HeaderBarSubnavItem extends React.Component {
         const { isHovered } = this.state;
         const itemStyle = {
         };
-        if(isHovered) { itemStyle.color = nav.props['data-color']; }
         let content = nav;
+        if(isHovered) {
+            itemStyle.color = content.props['data-color'];
+            if('img' === content.props.children.type) {
+                content = React.cloneElement(
+                    nav, undefined,
+                    <img
+                        {...content.props.children.props}
+                        style={{backgroundColor: content.props['data-color']}}
+                    >{content.props.children.props.children}</img>
+                );
+            }
+        }
         return <div
             className='header-bar-subnav-item' style={itemStyle}
             onMouseEnter={this.onMouseEnter}
