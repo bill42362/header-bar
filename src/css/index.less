@@ -15,9 +15,13 @@
     @-o-keyframes ~'@{name}' { @rules(); }
     @keyframes ~'@{name}' { @rules(); }
 }
-.keyframes(fadeIn, {
+.keyframes(fadeInHalf, {
     0% { opacity: 0; }
     100% { opacity: 0.5; }
+});
+.keyframes(fadeIn, {
+    0% { top: -15px; opacity: 0; }
+    100% { top: 0px; opacity: 1; }
 });
 div.header-bar {
     a {
@@ -109,12 +113,14 @@ div.header-bar {
                 flex: none;
                 margin-right: 20px;
                 width: 25px;
+                cursor: pointer;
             }
             div.header-bar-collapse-hamburger {
                 flex: none;
                 display: inline-block;
                 margin-right: 20px;
                 font-size: 27px;
+                cursor: pointer;
             }
         }
         div.header-bar-collapse-menu-wrapper {
@@ -128,7 +134,8 @@ div.header-bar {
                 top: 0px; left: 0px;
                 background-color: white;
                 opacity: 0.5;
-                .animation(fadeIn, .6s, 0s, ease);
+                cursor: pointer;
+                .animation(fadeInHalf, .6s, 0s, ease);
             }
             div.header-bar-collapse-menu {
                 display: flex;
@@ -139,15 +146,17 @@ div.header-bar {
                 right: 0px; top: 0px;
                 background-color: rgb(12, 12, 12);
                 line-height: 2.5em;
+                .animation(fadeIn, .6s, 0s, ease);
                 div.header-bar-collapse-menu-header {
                     flex: none;
                     border-bottom: 5px solid gray;
                     height: @headerBarHeight;
                     div.header-bar-collapse-menu-closer {
                         position: absolute;
-                        right: 8px;
+                        right: 20px;
                         font-size: 24px;
                         line-height: @headerBarHeight;
+                        cursor: pointer;
                     }
                 }
                 nav.header-bar-collapse-menu-nav {
