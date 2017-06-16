@@ -12,7 +12,7 @@ class HeaderBar extends React.Component {
         super(props);
     }
     render() {
-        const { style, logo, hamburger } = this.props;
+        const { style, logo, hamburger, menuCloser } = this.props;
         let { children } = this.props;
         if(!children.length) { children = [children]; }
         const navs = children.filter(child => { return !child.props['data-subnav']; });
@@ -32,6 +32,25 @@ class HeaderBar extends React.Component {
                 <div className='header-bar-collapse-placeholder'></div>
                 {!!hamburger && <img className='header-bar-collapse-hamburger' {...hamburger}></img>}
                 {!hamburger && <div className='header-bar-collapse-hamburger'>≡</div>}
+            </div>
+            <div className='header-bar-collapse-menu-wrapper'>
+                <div className='header-bar-collapse-menu-frame'></div>
+                <div className='header-bar-collapse-menu'>
+                    <div className='header-bar-collapse-menu-header'>
+                        {!!menuCloser && <img className='header-bar-collapse-menu-closer' {...menuCloser}></img>}
+                        {!menuCloser && <div className='header-bar-collapse-menu-closer'>✖︎</div>}
+                    </div>
+                    <nav className='header-bar-collapse-menu-nav'>
+                        {navs.map((nav, index) => {
+                            return <div
+                                className='header-bar-collapse-nav-item'
+                                style={{borderLeft: `2px solid ${nav.props['data-color']}`}}
+                            >{nav}</div>;
+                        })}
+                    </nav>
+                    <nav className='header-bar-collapse-menu-subnav'>
+                    </nav>
+                </div>
             </div>
         </div>;
     }

@@ -1,6 +1,24 @@
 // index.less
 @import './notosanstc.less';
 @headerBarHeight: 40px;
+.animation(@name, @duration: 3s, @delay: 0s, @ease: ease-out) {
+    -webkit-animation: @name @duration @ease @delay;
+    -moz-animation:    @name @duration @ease @delay;
+    -ms-animation:     @name @duration @ease @delay;
+    -o-animation:     @name @duration @ease @delay;
+    animation:     @name @duration @ease @delay;
+}
+.keyframes (@name, @rules) {
+    @-webkit-keyframes ~'@{name}' { @rules(); }
+    @-moz-keyframes ~'@{name}' { @rules(); }
+    @-ms-keyframes ~'@{name}' { @rules(); }
+    @-o-keyframes ~'@{name}' { @rules(); }
+    @keyframes ~'@{name}' { @rules(); }
+}
+.keyframes(fadeIn, {
+    0% { opacity: 0; }
+    100% { opacity: 0.5; }
+});
 div.header-bar {
     a {
         text-decoration: none;
@@ -72,6 +90,7 @@ div.header-bar {
         }
     }
     div.header-bar-collapse { display: none; }
+    div.header-bar-collapse-menu-wrapper { display: none; }
 }
 
 @media (max-width: 767px) {
@@ -96,6 +115,59 @@ div.header-bar {
                 display: inline-block;
                 margin-right: 20px;
                 font-size: 27px;
+            }
+        }
+        div.header-bar-collapse-menu-wrapper {
+            display: block;
+            position: fixed;
+            width: 100%; height: 100%;
+            top: 0px; left: 0px;
+            div.header-bar-collapse-menu-frame {
+                position: absolute;
+                width: 100%; height: 100%;
+                top: 0px; left: 0px;
+                background-color: white;
+                opacity: 0.5;
+                .animation(fadeIn, .6s, 0s, ease);
+            }
+            div.header-bar-collapse-menu {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                width: 100%; max-width: 300px;
+                min-height: 400px; max-height: 100%;
+                right: 0px; top: 0px;
+                background-color: rgb(12, 12, 12);
+                div.header-bar-collapse-menu-header {
+                    flex: none;
+                    border-bottom: 5px solid gray;
+                    height: @headerBarHeight;
+                    div.header-bar-collapse-menu-closer {
+                        position: absolute;
+                        right: 8px;
+                        font-size: 24px;
+                        line-height: @headerBarHeight;
+                    }
+                }
+                nav.header-bar-collapse-menu-nav {
+                    flex: auto;
+                    padding: 20px 15px;
+                    div.header-bar-collapse-nav-item {
+                        border-left: 2px solid gray;
+                        margin-bottom: 40px;
+                        color: white;
+                        a {
+                            display: block;
+                            padding-left: 7px; 
+                            color: inherit;
+                            font-size: 20px;
+                            line-height: 20px;
+                        }
+                    }
+                }
+                subnav.header-bar-collapse-menu-subnav {
+                    flex: none;
+                }
             }
         }
     }
