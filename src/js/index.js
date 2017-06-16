@@ -43,12 +43,15 @@ class HeaderBar extends React.Component {
                     <nav className='header-bar-collapse-menu-nav'>
                         {navs.map((nav, index) => {
                             return <div
-                                className='header-bar-collapse-nav-item'
+                                className='header-bar-collapse-nav-item' key={index}
                                 style={{borderLeft: `2px solid ${nav.props['data-color']}`}}
                             >{nav}</div>;
                         })}
                     </nav>
                     <nav className='header-bar-collapse-menu-subnav'>
+                        {subnavs.map((subnav, index) => {
+                            return <div className='header-bar-collapse-subnav-item' key={index} >{subnav}</div>;
+                        })}
                     </nav>
                 </div>
             </div>
