@@ -72,15 +72,10 @@ gulp.task('img-dist', function() {
     tempBundle.pipe(gulp.dest('dist/img'));
 });
 
-gulp.task('font-dist', function() {
-    var tempBundle = gulp.src(['../src/fonts/**/*']);
-    tempBundle.pipe(gulp.dest('dist/fonts'));
-});
-
 gulp.task('html-dist', function() {
     var tempBundle = gulp.src(['./html/**/*.html']);
     tempBundle.pipe(gulp.dest('dist/html'));
 });
 
-gulp.task('dist', ['js-dist', 'html-dist', 'img-dist', 'css-dist', 'font-dist']);
+gulp.task('dist', ['js-dist', 'html-dist', 'img-dist', 'css-dist']);
 gulp.task('default', ['dist']);
