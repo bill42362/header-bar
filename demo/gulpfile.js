@@ -48,7 +48,7 @@ gulp.task('js-dist', function() {
 const distributeCss = function() {
     var tempBundle = gulp.src('./css/lib.less')
     .pipe(less())
-    .on('error', function(e) { errorHandler(app, e, this); })
+    .on('error', function(e) { errorHandler('lib.css', e, this); })
     .pipe(gulp.dest('./dist/css'));
 }
 
