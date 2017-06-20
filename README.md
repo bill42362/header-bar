@@ -6,6 +6,7 @@ Basic header bar with RWD.
 npm install --save-dev header-bar
 ```
 ### Usage
+#### Javascript
 ```js
 import React from 'react';
 import HeaderBar from 'header-bar';
@@ -23,7 +24,10 @@ class App extends React.Component {
         </HeaderBar>
     </div>;
 }
-
+```
+#### LESS
+```less
+@import (inline) '../node_modules/header-bar/lib/css/index.css';
 ```
 
 ### Demo
