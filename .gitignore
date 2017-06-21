@@ -1,6 +1,7 @@
 .DS_Store
 *.swp
 *backup*
+*.log
 node_modules/
 dist/
 lib/
