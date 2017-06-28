@@ -21,6 +21,10 @@ class HeaderBar extends React.Component {
         const { isMenuOpen } = this.state;
         let { children } = this.props;
         if(!children.length) { children = [children]; }
+        children = children.reduce((current, child) => {
+            if(!child.length) { return [...current, child]; }
+            else { return [...current, ...child]; }
+        }, []);
         const navs = children.filter(child => { return !child.props['data-subnav']; });
         const subnavs = children.filter(child => { return child.props['data-subnav']; });
         return <div className='header-bar' style={style}>
