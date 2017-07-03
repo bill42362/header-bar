@@ -25,6 +25,7 @@
 div.header-bar {
     a {
         text-decoration: none;
+        color: inherit;
         &:hover { text-decoration: none; }
         &:visited { text-decoration: none; }
         &:focus {
@@ -41,9 +42,19 @@ div.header-bar {
     letter-spacing: 2px;
     color: white;
     overflow: hidden;
+    &::before {
+        flex: none;
+        width: 30px;
+        content: "";
+    }
+    &::after {
+        flex: none;
+        width: 40px;
+        content: "";
+    }
     img.header-bar-logo {
         flex: none;
-        margin: 0px 28px 0px 30px;
+        margin-right: 28px;
         padding: 10px 0px;
         height: 20px;
         width: auto;
@@ -68,7 +79,6 @@ div.header-bar {
     }
     nav.header-bar-subnav {
         flex: none;
-        margin-right: 40px;
         div.header-bar-subnav-item {
             display: inline-block;
             margin-left: 5px;
@@ -84,11 +94,22 @@ div.header-bar {
                 &:hover { font-weight: 400; }
                 img {
                     border-radius: 2px;
-                    width: 17px; height: 17px;
-                    vertical-align: sub;
+                    width: auto; height: 1.5em;
+                    vertical-align: middle;
                     transition: background-color .6s ease;
                 }
             }
+        }
+    }
+    div.header-bar-submenu {
+        margin-left: 20px;
+        display: flex;
+        align-items: center;
+        line-height: 1em;
+        img {
+            border-radius: 2px;
+            width: auto; height: 1.2em;
+            vertical-align: middle;
         }
     }
     div.header-bar-collapse { display: none; }
@@ -97,11 +118,19 @@ div.header-bar {
 
 @media (max-width: 767px) {
     div.header-bar {
-        img.header-bar-logo {
-            margin-left: 20px;
+        &::before {
+            flex: none;
+            width: 20px;
+            content: "";
+        }
+        &::after {
+            flex: none;
+            width: 20px;
+            content: "";
         }
         nav.header-bar-nav { display: none; }
         nav.header-bar-subnav { display: none; }
+        div.header-bar-submenu { display: none; }
         div.header-bar-collapse {
             display: flex;
             flex: auto;
@@ -109,14 +138,12 @@ div.header-bar {
             div.header-bar-collapse-placeholder { flex: auto; }
             img.header-bar-collapse-hamburger {
                 flex: none;
-                margin-right: 20px;
                 width: 25px;
                 cursor: pointer;
             }
             div.header-bar-collapse-hamburger {
                 flex: none;
                 display: inline-block;
-                margin-right: 20px;
                 font-size: 27px;
                 cursor: pointer;
             }
@@ -147,11 +174,22 @@ div.header-bar {
                 .animation(fadeIn, .6s, 0s, ease);
                 div.header-bar-collapse-menu-header {
                     flex: none;
+                    display: flex;
                     border-bottom: 5px solid gray;
                     height: @headerBarHeight;
+                    div.header-bar-collapse-menu-submenu {
+                        flex: auto;
+                        margin-left: 20px;
+                        line-height: @headerBarHeight;
+                        img {
+                            border-radius: 2px;
+                            width: auto; height: 1.2em;
+                            vertical-align: middle;
+                        }
+                    }
                     div.header-bar-collapse-menu-closer {
-                        position: absolute;
-                        right: 20px;
+                        flex: none;
+                        margin-right: 20px;
                         font-size: 24px;
                         line-height: @headerBarHeight;
                         cursor: pointer;
