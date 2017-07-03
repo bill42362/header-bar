@@ -25,8 +25,9 @@ class HeaderBar extends React.Component {
             if(!child.length) { return [...current, child]; }
             else { return [...current, ...child]; }
         }, []);
-        const navs = children.filter(child => { return !child.props['data-subnav']; });
+        const navs = children.filter(child => { return !child.props['data-subnav'] && !child.props['data-submenu']; });
         const subnavs = children.filter(child => { return child.props['data-subnav']; });
+        const submenu = children.filter(child => { return child.props['data-submenu']; })[0];
         return <div className='header-bar' style={style}>
             {!!logo && <img
                 className={'header-bar-logo ' + logo.className}
@@ -38,6 +39,7 @@ class HeaderBar extends React.Component {
             <nav className='header-bar-subnav'>
                 {subnavs.map((subnav, index) => (<HeaderBarSubnavItem nav={subnav} key={index} />))}
             </nav>
+            {!!submenu && <div className='header-bar-submenu'>{submenu}</div>}
             <div className='header-bar-collapse'>
                 <div className='header-bar-collapse-placeholder'></div>
                 {!!hamburger && <img
@@ -54,6 +56,7 @@ class HeaderBar extends React.Component {
                 <div className='header-bar-collapse-menu-frame' role='button' onClick={this.closeMenu}></div>
                 <div className='header-bar-collapse-menu'>
                     <div className='header-bar-collapse-menu-header'>
+                        {!!submenu && <div className='header-bar-collapse-menu-submenu'>{submenu}</div>}
                         {!!menuCloser && <img
                             {...menuCloser}
                             className='header-bar-collapse-menu-closer'
