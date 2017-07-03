@@ -21,6 +21,7 @@ class App extends React.Component {
             <a href='//localhost' data-color='goldenrod' data-match='local(.*)'>nav-link-2</a>
             <a href='//facebook.com' data-subnav={true} data-color='rgb(62, 86, 155)'><img src='/img/facebook.svg'/></a>
             <a href='//sub.nav.link' data-subnav={true} data-color='rgb(229, 26, 0)'>sub-nav-link</a>
+            <div data-submenu={true} ><a href='/login' title='login'>登入</a></div>
         </HeaderBar>
     </div>;
 }
