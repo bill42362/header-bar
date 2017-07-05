@@ -11,6 +11,7 @@ var onReadyStateChange = function onReadyStateChange(e) {
                 <HeaderBar
                     logo={{ src:'/img/logo.svg', title:'LOGO' }}
                     hamburger={{ src:'/img/hamburger.svg', title:'Menu' }}
+                    menuCloser={{ src:'/img/hamburger.svg', title:'Close menu' }}
                 >
                     {[
                         <a key='0' href='//media.pbplus.me' data-color='rgb(64, 124, 156)' data-match='media.pbplus.me'>運動專欄</a>,
