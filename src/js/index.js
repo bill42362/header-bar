@@ -34,7 +34,9 @@ class HeaderBar extends React.Component {
                 {...logo}
             ></img>}
             <nav className='header-bar-nav'>
-                {navs.map((nav, index) => (<HeaderBarNavItem nav={nav} key={index} />))}
+                {navs.filter(nav => !nav.props['data-childnav']).map((nav, index) => {
+                    return <HeaderBarNavItem nav={nav} key={index} />;
+                })}
             </nav>
             <nav className='header-bar-subnav'>
                 {subnavs.map((subnav, index) => (<HeaderBarSubnavItem nav={subnav} key={index} />))}
@@ -69,10 +71,17 @@ class HeaderBar extends React.Component {
                     </div>
                     <nav className='header-bar-collapse-menu-nav'>
                         {navs.map((nav, index) => {
-                            return <div
-                                className='header-bar-collapse-nav-item' key={index}
-                                style={{borderLeft: `2px solid ${nav.props['data-color']}`}}
-                            >{nav}</div>;
+                            if(nav.props['data-childnav']) {
+                                return <div className='header-bar-collapse-childnav-item' key={index} >{nav}</div>;
+                            } else {
+                                return <div className='header-bar-collapse-nav-item' key={index} >
+                                    <span
+                                        className='header-bar-collapse-nav-item-left-bar'
+                                        style={{backgroundColor: nav.props['data-color']}}
+                                    ></span>
+                                    {nav}
+                                </div>;
+                            }
                         })}
                     </nav>
                     <nav className='header-bar-collapse-menu-subnav'>
