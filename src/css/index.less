@@ -209,14 +209,38 @@ div.header-bar {
                     padding: 20px 15px;
                     overflow: scroll;
                     div.header-bar-collapse-nav-item {
-                        border-left: 2px solid gray;
-                        margin-bottom: 40px;
+                        padding: 30px 0px 10px;
                         color: white;
+                        height: 20px;
+                        &:first-of-type { padding-top: 0px; }
+                        span.header-bar-collapse-nav-item-left-bar {
+                            display: inline-block;
+                            width: 2px; height: 20px;
+                            background-color: gray;
+                            vertical-align: top;
+                        }
+                        a {
+                            display: inline;
+                            padding-left: 7px; 
+                            color: inherit;
+                            font-size: 20px;
+                            line-height: 20px;
+                            vertical-align: top;
+                        }
+                    }
+                    div.header-bar-collapse-childnav-item {
+                        padding: 5px 0px 5px 25px;
+                        font-size: 16px;
+                        color: white;
+                        img:first-of-type {
+                            margin-right: 0.5em;
+                            width: auto; height: 2em;
+                            vertical-align: middle;
+                        }
                         a {
                             display: block;
                             padding-left: 7px; 
                             color: inherit;
-                            font-size: 20px;
                             line-height: 20px;
                         }
                     }
