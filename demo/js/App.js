@@ -31,7 +31,9 @@ var onReadyStateChange = function onReadyStateChange(e) {
                     <a href='//facebook.com' data-subnav={true} data-color='rgb(62, 86, 155)'><img src='/img/facebook.svg'/></a>
                     <a href='//youtube.com' data-subnav={true} data-color='rgb(229, 26, 0)'><img src='/img/youtube.svg'/></a>
                     <a href='//timeline.line.me' data-subnav={true} data-color='rgb(0, 181, 9)'><img src='/img/line.svg'/></a>
-                    <div data-submenu={true} ><a href='/login' title='login'>登入</a></div>
+                    <div data-submenu_button={true} ><span title='login'>登入</span></div>
+                    <div data-submenu_item={true} ><a href='/user-info' title='User Info'>使用者資訊</a></div>
+                    <div data-submenu_item={true} ><a href='/pay-history' title='Pay History'>購買紀錄</a></div>
                 </HeaderBar>
             </div>,
             document.getElementById('app-root')

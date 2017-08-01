@@ -10,15 +10,19 @@ const defaultProps = {
 class HeaderBar extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {isMenuOpen: false};
+        this.state = {isMenuOpen: false, isSubmenuOpen: false};
         this.openMenu = this.openMenu.bind(this);
         this.closeMenu = this.closeMenu.bind(this);
+        this.openSubmenu = this.openSubmenu.bind(this);
+        this.closeSubmenu = this.closeSubmenu.bind(this);
     }
     openMenu() { this.setState({isMenuOpen: true}); }
     closeMenu() { this.setState({isMenuOpen: false}); }
+    openSubmenu() { this.setState({isSubmenuOpen: true}); }
+    closeSubmenu() { this.setState({isSubmenuOpen: false}); }
     render() {
         const { style, logo: propsLogo, hamburger, menuCloser } = this.props;
-        const { isMenuOpen } = this.state;
+        const { isMenuOpen, isSubmenuOpen } = this.state;
         let { children } = this.props;
         if(!children.length) { children = [children]; }
         children = children.reduce((current, child) => {
@@ -28,7 +32,8 @@ class HeaderBar extends React.Component {
         const childLogo = children.filter(child => { return child.props['data-logo']; })[0];
         const navs = children.filter(child => { return child.props['data-nav']; });
         const subnavs = children.filter(child => { return child.props['data-subnav']; });
-        const submenu = children.filter(child => { return child.props['data-submenu']; })[0];
+        const submenuButtton = children.filter(child => { return child.props['data-submenu_button']; })[0];
+        const submenuItems = children.filter(child => { return child.props['data-submenu_item']; });
         return <div className='header-bar' style={style}>
             {(propsLogo && !childLogo) && <img
                 className={'header-bar-logo ' + propsLogo.className} {...propsLogo}
@@ -42,7 +47,10 @@ class HeaderBar extends React.Component {
             <nav className='header-bar-subnav'>
                 {subnavs.map((subnav, index) => (<HeaderBarSubnavItem nav={subnav} key={index} />))}
             </nav>
-            {!!submenu && <div className='header-bar-submenu'>{submenu}</div>}
+            {!!submenuButtton && <div
+                className={`header-bar-submenu-button${isSubmenuOpen ? ' open' : ' close'}`}
+                onClick={isSubmenuOpen ? this.closeSubmenu : this.openSubmenu}
+            >{submenuButtton}</div>}
             <div className='header-bar-collapse'>
                 <div className='header-bar-collapse-placeholder'></div>
                 {!!hamburger && <img
@@ -59,7 +67,9 @@ class HeaderBar extends React.Component {
                 <div className='header-bar-collapse-menu-frame' role='button' onClick={this.closeMenu}></div>
                 <div className='header-bar-collapse-menu'>
                     <div className='header-bar-collapse-menu-header'>
-                        {!!submenu && <div className='header-bar-collapse-menu-submenu'>{submenu}</div>}
+                        {!!submenuButtton && <div className='header-bar-collapse-menu-submenu-button'>
+                            {submenuButtton}
+                        </div>}
                         {!!menuCloser && <img
                             {...menuCloser}
                             className='header-bar-collapse-menu-closer'

@@ -48,7 +48,7 @@ div.header-bar {
     }
     &::after {
         flex: none;
-        width: 40px;
+        width: 30px;
         content: "";
     }
     img.header-bar-logo {
@@ -109,12 +109,16 @@ div.header-bar {
             }
         }
     }
-    div.header-bar-submenu {
-        margin-left: 20px;
+    div.header-bar-submenu-button {
+        margin-left: 10px;
+        padding: 0px 10px;
         display: flex;
         align-items: center;
         font-size: 14px;
         line-height: 14px;
+        cursor: pointer;
+        transition: background-color .6s ease;
+        &.open { background-color: dimgray; }
         img {
             border-radius: 2px;
             width: auto; height: 1.2em;
@@ -139,7 +143,7 @@ div.header-bar {
         }
         nav.header-bar-nav { display: none; }
         nav.header-bar-subnav { display: none; }
-        div.header-bar-submenu { display: none; }
+        div.header-bar-submenu-button { display: none; }
         div.header-bar-collapse {
             display: flex;
             flex: auto;
@@ -187,7 +191,7 @@ div.header-bar {
                     align-items: center;
                     border-bottom: 5px solid gray;
                     height: @headerBarHeight;
-                    div.header-bar-collapse-menu-submenu {
+                    div.header-bar-collapse-menu-submenu-button {
                         flex: auto;
                         margin-left: 20px;
                         font-size: 14px;
