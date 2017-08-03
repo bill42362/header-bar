@@ -9,10 +9,10 @@ var onReadyStateChange = function onReadyStateChange(e) {
         ReactDOM.render(
             <div className='header'>
                 <HeaderBar
-                    logo={{ src:'/img/logo.svg', title:'LOGO' }}
                     hamburger={{ src:'/img/hamburger.svg', title:'Menu' }}
                     menuCloser={{ src:'/img/hamburger.svg', title:'Close menu' }}
                 >
+                    <a href='//tw.pbplus.me' data-logo={true}><img src='/img/logo.svg' title='Home'/></a>
                     {[
                         <a
                             key='0' href='//media.pbplus.me'
