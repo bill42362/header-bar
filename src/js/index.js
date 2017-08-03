@@ -17,7 +17,7 @@ class HeaderBar extends React.Component {
     openMenu() { this.setState({isMenuOpen: true}); }
     closeMenu() { this.setState({isMenuOpen: false}); }
     render() {
-        const { style, logo, hamburger, menuCloser } = this.props;
+        const { style, logo: propsLogo, hamburger, menuCloser } = this.props;
         const { isMenuOpen } = this.state;
         let { children } = this.props;
         if(!children.length) { children = [children]; }
@@ -25,14 +25,13 @@ class HeaderBar extends React.Component {
             if(!child.length) { return [...current, child]; }
             else { return [...current, ...child]; }
         }, []);
+        const childLogo = children.filter(child => { return child.props['data-logo']; })[0];
         const navs = children.filter(child => { return child.props['data-nav']; });
         const subnavs = children.filter(child => { return child.props['data-subnav']; });
         const submenu = children.filter(child => { return child.props['data-submenu']; })[0];
         return <div className='header-bar' style={style}>
-            {!!logo && <img
-                className={'header-bar-logo ' + logo.className}
-                {...logo}
-            ></img>}
+            {(propsLogo && !childLogo) && <img className={'header-bar-logo ' + logo.className} {...logo} ></img>}
+            {!!childLogo && <div className='header-bar-logo'>{childLogo}</div>}
             <nav className='header-bar-nav'>
                 {navs.filter(nav => !nav.props['data-childnav']).map((nav, index) => {
                     return <HeaderBarNavItem nav={nav} key={index} />;
