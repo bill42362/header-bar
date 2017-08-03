@@ -1,6 +1,6 @@
 // App.js
 'use strict'
-import HeaderBar from 'header-bar';
+import HeaderBar from '../../src/js/index.js';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -31,9 +31,26 @@ var onReadyStateChange = function onReadyStateChange(e) {
                     <a href='//facebook.com' data-subnav={true} data-color='rgb(62, 86, 155)'><img src='/img/facebook.svg'/></a>
                     <a href='//youtube.com' data-subnav={true} data-color='rgb(229, 26, 0)'><img src='/img/youtube.svg'/></a>
                     <a href='//timeline.line.me' data-subnav={true} data-color='rgb(0, 181, 9)'><img src='/img/line.svg'/></a>
-                    <div data-submenu_button={true} ><span title='login'>登入</span></div>
-                    <div data-submenu_item={true} ><a href='/user-info' title='User Info'>使用者資訊</a></div>
-                    <div data-submenu_item={true} ><a href='/pay-history' title='Pay History'>購買紀錄</a></div>
+                    <div data-submenu_button={true} data-submenu_key='login'><span title='login'>登入</span></div>
+                    <div data-submenu_button={true} data-submenu_key='logpeople'><span title='logpeople'>登人</span></div>
+                    <div data-submenu_item={true}  data-submenu_key='login'>
+                        <a href='/user-info' title='User Info'>使用者資訊</a>
+                    </div>
+                    <div data-submenu_item={true}  data-submenu_key='login'>
+                        <a href='/user-info' title='User Info'>使用者資訊</a>
+                    </div>
+                    <div data-submenu_item={true}  data-submenu_key='login'>
+                        <a href='/user-info' title='User Info'>使用者資訊</a>
+                    </div>
+                    <div data-submenu_item={true} data-submenu_key='logpeople'>
+                        <a href='/pay-history' title='Pay History'>購買紀錄</a>
+                    </div>
+                    <div data-submenu_item={true} data-submenu_key='logpeople'>
+                        <a href='/pay-history' title='Pay History'>購買紀錄</a>
+                    </div>
+                    <div data-submenu_item={true} data-submenu_key='logpeople'>
+                        <a href='/pay-history' title='Pay History'>購買紀錄</a>
+                    </div>
                 </HeaderBar>
             </div>,
             document.getElementById('app-root')

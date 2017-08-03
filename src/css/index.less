@@ -22,6 +22,10 @@
     0% { top: -15px; opacity: 0; }
     100% { top: 0px; opacity: 1; }
 });
+.keyframes(submenuFadeIn, {
+    0% { right: -15px; opacity: 0; }
+    100% { right: 0px; opacity: 1; }
+});
 div.header-bar {
     a {
         text-decoration: none;
@@ -110,6 +114,7 @@ div.header-bar {
         }
     }
     div.header-bar-submenu-button {
+        position: relative;
         margin-left: 10px;
         padding: 0px 10px;
         display: flex;
@@ -123,6 +128,20 @@ div.header-bar {
             border-radius: 2px;
             width: auto; height: 1.2em;
             vertical-align: middle;
+        }
+        div.header-bar-submenu-wrapper {
+            display: block;
+            position: absolute;
+            top: @headerBarHeight; right: 0px;
+            div.header-bar-submenu {
+                display: inline-block;
+                position: relative;
+                padding: 15px;
+                right: 0px; top: 0px;
+                background-color: white;
+                color: blue;
+                white-space: nowrap;
+            }
         }
     }
     div.header-bar-collapse { display: none; }
@@ -144,6 +163,7 @@ div.header-bar {
         nav.header-bar-nav { display: none; }
         nav.header-bar-subnav { display: none; }
         div.header-bar-submenu-button { display: none; }
+        div.header-bar-submenu-wrapper { display: none; }
         div.header-bar-collapse {
             display: flex;
             flex: auto;

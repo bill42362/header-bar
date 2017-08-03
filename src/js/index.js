@@ -10,19 +10,27 @@ const defaultProps = {
 class HeaderBar extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {isMenuOpen: false, isSubmenuOpen: false};
+        this.state = {isMenuOpen: false, submenuOpenKey: 'login'};
         this.openMenu = this.openMenu.bind(this);
         this.closeMenu = this.closeMenu.bind(this);
         this.openSubmenu = this.openSubmenu.bind(this);
         this.closeSubmenu = this.closeSubmenu.bind(this);
     }
+    getSubmenuKey(element) {
+        let key = undefined, target = element;
+        while(!key && !!target) {
+            key = target.getAttribute('data-submenu_key');
+            target = target.parentNode;
+        }
+        return key;
+    }
     openMenu() { this.setState({isMenuOpen: true}); }
     closeMenu() { this.setState({isMenuOpen: false}); }
-    openSubmenu() { this.setState({isSubmenuOpen: true}); }
-    closeSubmenu() { this.setState({isSubmenuOpen: false}); }
+    openSubmenu(e) { this.setState({submenuOpenKey: this.getSubmenuKey(e.target)}); }
+    closeSubmenu(e) { this.setState({submenuOpenKey: ''}); }
     render() {
         const { style, logo: propsLogo, hamburger, menuCloser } = this.props;
-        const { isMenuOpen, isSubmenuOpen } = this.state;
+        const { isMenuOpen, submenuOpenKey } = this.state;
         let { children } = this.props;
         if(!children.length) { children = [children]; }
         children = children.reduce((current, child) => {
@@ -32,8 +40,7 @@ class HeaderBar extends React.Component {
         const childLogo = children.filter(child => { return child.props['data-logo']; })[0];
         const navs = children.filter(child => { return child.props['data-nav']; });
         const subnavs = children.filter(child => { return child.props['data-subnav']; });
-        const submenuButtton = children.filter(child => { return child.props['data-submenu_button']; })[0];
-        const submenuItems = children.filter(child => { return child.props['data-submenu_item']; });
+        const submenuButttons = children.filter(child => { return child.props['data-submenu_button']; });
         return <div className='header-bar' style={style}>
             {(propsLogo && !childLogo) && <img
                 className={'header-bar-logo ' + propsLogo.className} {...propsLogo}
@@ -47,10 +54,30 @@ class HeaderBar extends React.Component {
             <nav className='header-bar-subnav'>
                 {subnavs.map((subnav, index) => (<HeaderBarSubnavItem nav={subnav} key={index} />))}
             </nav>
-            {!!submenuButtton && <div
-                className={`header-bar-submenu-button${isSubmenuOpen ? ' open' : ' close'}`}
-                onClick={isSubmenuOpen ? this.closeSubmenu : this.openSubmenu}
-            >{submenuButtton}</div>}
+            {submenuButttons.map((submenuButtton, index) => {
+                const submenuKey = submenuButtton.props['data-submenu_key'];
+                const isSubmenuOpening = submenuOpenKey === submenuKey;
+                const submenuItems = children.filter(child => {
+                    return child.props['data-submenu_item'] && submenuKey === child.props['data-submenu_key'];
+                });
+                return <div
+                    key={index}
+                    className={`header-bar-submenu-button${isSubmenuOpening ? ' open' : ' close'}`}
+                    onClick={isSubmenuOpening ? this.closeSubmenu : this.openSubmenu}
+                    data-submenu_key={submenuKey}
+                >
+                    {submenuButtton}
+                    {isSubmenuOpening && <div className='header-bar-submenu-wrapper'>
+                        <div className='header-bar-submenu' >
+                            <div className='header-bar-submenu-items'>
+                                {submenuItems.map((submenuItem, index) => {
+                                    return <div className='header-bar-submenu-item' key={index}>{submenuItem}</div>;
+                                })}
+                            </div>
+                        </div>
+                    </div>}
+                </div>;
+            })}
             <div className='header-bar-collapse'>
                 <div className='header-bar-collapse-placeholder'></div>
                 {!!hamburger && <img
