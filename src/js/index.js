@@ -30,7 +30,9 @@ class HeaderBar extends React.Component {
         const subnavs = children.filter(child => { return child.props['data-subnav']; });
         const submenu = children.filter(child => { return child.props['data-submenu']; })[0];
         return <div className='header-bar' style={style}>
-            {(propsLogo && !childLogo) && <img className={'header-bar-logo ' + logo.className} {...logo} ></img>}
+            {(propsLogo && !childLogo) && <img
+                className={'header-bar-logo ' + propsLogo.className} {...propsLogo}
+            ></img>}
             {!!childLogo && <div className='header-bar-logo'>{childLogo}</div>}
             <nav className='header-bar-nav'>
                 {navs.filter(nav => !nav.props['data-childnav']).map((nav, index) => {
