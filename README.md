@@ -21,7 +21,10 @@ class App extends React.Component {
             <a href='//localhost' data-nav={true} data-color='goldenrod' data-match='local(.*)'>nav-link-2</a>
             <a href='//facebook.com' data-subnav={true} data-color='rgb(62, 86, 155)'><img src='/img/facebook.svg'/></a>
             <a href='//sub.nav.link' data-subnav={true} data-color='rgb(229, 26, 0)'>sub-nav-link</a>
-            <div data-submenu_button={true} data-submenu_key='login'><span title='login'>設定</span></div>
+            <div data-submenu_button={true} data-submenu_key='login'>
+                <img src='/img/facebook.svg' style={{height: '1.8em', borderRadius: '0.9em'}}/>
+                <span title='login'>設定</span>
+            </div>
             <div data-submenu_button={true} data-submenu_key='logpeople'><span title='logpeople'>紀錄</span></div>
             <div data-submenu_item={true}  data-submenu_key='login' data-submenu_position='header'>
                 <div style={{color: 'rgb(24, 155, 202)'}}>VIP會員</div>
