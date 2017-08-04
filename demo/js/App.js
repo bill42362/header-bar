@@ -31,8 +31,11 @@ var onReadyStateChange = function onReadyStateChange(e) {
                     <a href='//facebook.com' data-subnav={true} data-color='rgb(62, 86, 155)'><img src='/img/facebook.svg'/></a>
                     <a href='//youtube.com' data-subnav={true} data-color='rgb(229, 26, 0)'><img src='/img/youtube.svg'/></a>
                     <a href='//timeline.line.me' data-subnav={true} data-color='rgb(0, 181, 9)'><img src='/img/line.svg'/></a>
-                    <div data-submenu_button={true} data-submenu_key='login'><span title='login'>登入</span></div>
-                    <div data-submenu_button={true} data-submenu_key='logpeople'><span title='logpeople'>登人</span></div>
+                    <div data-submenu_button={true} data-submenu_key='login'>
+                        <img src='/img/line.svg' style={{height: '1.8em', borderRadius: '0.9em'}} />
+                        <span title='login'>Bill</span>
+                    </div>
+                    <div data-submenu_button={true} data-submenu_key='logpeople'><span title='logpeople'>紀錄</span></div>
                     <div data-submenu_item={true}  data-submenu_key='login' data-submenu_position='header'>
                         <div style={{color: 'rgb(24, 155, 202)'}}>VIP會員</div>
                     </div>
