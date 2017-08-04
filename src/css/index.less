@@ -22,6 +22,10 @@
     0% { top: -15px; opacity: 0; }
     100% { top: 0px; opacity: 1; }
 });
+.keyframes(submenuFadeIn, {
+    0% { right: -15px; opacity: 0; }
+    100% { right: 0px; opacity: 1; }
+});
 div.header-bar {
     a {
         text-decoration: none;
@@ -48,7 +52,7 @@ div.header-bar {
     }
     &::after {
         flex: none;
-        width: 40px;
+        width: 30px;
         content: "";
     }
     img.header-bar-logo {
@@ -109,16 +113,53 @@ div.header-bar {
             }
         }
     }
-    div.header-bar-submenu {
-        margin-left: 20px;
+    div.header-bar-submenu-group {
+        position: relative;
         display: flex;
         align-items: center;
-        font-size: 14px;
-        line-height: 14px;
-        img {
-            border-radius: 2px;
-            width: auto; height: 1.2em;
-            vertical-align: middle;
+        margin-left: 10px;
+        div.header-bar-submenu-button {
+            padding: 0px 10px;
+            font-size: 14px;
+            height: 100%;
+            cursor: pointer;
+            transition: background-color .6s ease;
+            &.open { background-color: dimgray; }
+            * { line-height: @headerBarHeight; }
+            img {
+                border-radius: 2px;
+                width: auto; height: 1.2em;
+                vertical-align: middle;
+            }
+        }
+        div.header-bar-submenu-wrapper {
+            display: block;
+            position: absolute;
+            top: @headerBarHeight; right: 0px;
+            div.header-bar-submenu {
+                display: inline-block;
+                position: relative;
+                border-radius: 2px;
+                padding: 5px 15px;
+                right: 0px; top: 0px;
+                background-color: rgb(221, 221, 221);
+                color: black;
+                font-size: 14px;
+                font-weight: 500;
+                text-align: center;
+                white-space: nowrap;
+                &::before {
+                    content: '';
+                    position: absolute;
+                    top: -0.6em; right: 1.2em;
+                    border-right: 0.6em solid rgba(225, 225, 225, 0);
+                    border-left: 0.6em solid rgba(225, 225, 225, 0);
+                    border-bottom: 0.6em solid rgb(221, 221, 221);
+                }
+                div.header-bar-submenu-header { border-bottom: 1px solid black; }
+                div.header-bar-submenu-footer { border-top: 1px solid black; }
+                div.header-bar-submenu-item { padding: 0.8em 1em; }
+            }
         }
     }
     div.header-bar-collapse { display: none; }
@@ -139,7 +180,7 @@ div.header-bar {
         }
         nav.header-bar-nav { display: none; }
         nav.header-bar-subnav { display: none; }
-        div.header-bar-submenu { display: none; }
+        div.header-bar-submenu-group { display: none; }
         div.header-bar-collapse {
             display: flex;
             flex: auto;
@@ -184,17 +225,23 @@ div.header-bar {
                 div.header-bar-collapse-menu-header {
                     flex: none;
                     display: flex;
+                    padding-left: 15px;
                     align-items: center;
-                    border-bottom: 5px solid gray;
+                    border-bottom: 5px solid rgb(221, 221, 221);
                     height: @headerBarHeight;
-                    div.header-bar-collapse-menu-submenu {
+                    div.header-bar-collapse-menu-submenu-buttons {
                         flex: auto;
-                        margin-left: 20px;
-                        font-size: 14px;
-                        img {
-                            border-radius: 2px;
-                            width: auto; height: 1.2em;
-                            vertical-align: middle;
+                        div.header-bar-collapse-menu-submenu-button {
+                            display: inline-block;
+                            margin-right: 10px;
+                            font-size: 14px;
+                            cursor: pointer;
+                            img {
+                                border-radius: 2px;
+                                width: auto; height: 1.2em;
+                                margin-right: 5px;
+                                vertical-align: middle;
+                            }
                         }
                     }
                     div.header-bar-collapse-menu-closer {
@@ -211,6 +258,22 @@ div.header-bar {
                         margin-left: auto;
                         margin-right: 20px;
                         cursor: pointer;
+                    }
+                }
+                div.header-bar-collapse-menu-submenu-wrapper {
+                    flex: 0;
+                    position: relative;
+                    height: 0px;
+                    overflow: scroll;
+                    transition: height .6s ease;
+                    div.header-bar-collapse-menu-submenu {
+                        position: absolute;
+                        width: 100%;
+                        background-color: rgb(221, 221, 221);
+                        padding: 0px 15px;
+                        color: black;
+                        font-size: 14px;
+                        font-weight: 500;
                     }
                 }
                 nav.header-bar-collapse-menu-nav {
