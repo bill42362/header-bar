@@ -225,17 +225,23 @@ div.header-bar {
                 div.header-bar-collapse-menu-header {
                     flex: none;
                     display: flex;
+                    padding-left: 15px;
                     align-items: center;
-                    border-bottom: 5px solid gray;
+                    border-bottom: 5px solid rgb(221, 221, 221);
                     height: @headerBarHeight;
-                    div.header-bar-collapse-menu-submenu-button {
+                    div.header-bar-collapse-menu-submenu-buttons {
                         flex: auto;
-                        margin-left: 20px;
-                        font-size: 14px;
-                        img {
-                            border-radius: 2px;
-                            width: auto; height: 1.2em;
-                            vertical-align: middle;
+                        div.header-bar-collapse-menu-submenu-button {
+                            display: inline-block;
+                            margin-right: 10px;
+                            font-size: 14px;
+                            cursor: pointer;
+                            img {
+                                border-radius: 2px;
+                                width: auto; height: 1.2em;
+                                margin-right: 5px;
+                                vertical-align: middle;
+                            }
                         }
                     }
                     div.header-bar-collapse-menu-closer {
@@ -252,6 +258,22 @@ div.header-bar {
                         margin-left: auto;
                         margin-right: 20px;
                         cursor: pointer;
+                    }
+                }
+                div.header-bar-collapse-menu-submenu-wrapper {
+                    flex: 0;
+                    position: relative;
+                    height: 0px;
+                    overflow: scroll;
+                    transition: height .6s ease;
+                    div.header-bar-collapse-menu-submenu {
+                        position: absolute;
+                        width: 100%;
+                        background-color: rgb(221, 221, 221);
+                        padding: 0px 15px;
+                        color: black;
+                        font-size: 14px;
+                        font-weight: 500;
                     }
                 }
                 nav.header-bar-collapse-menu-nav {
