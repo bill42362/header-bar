@@ -21,7 +21,23 @@ class App extends React.Component {
             <a href='//localhost' data-nav={true} data-color='goldenrod' data-match='local(.*)'>nav-link-2</a>
             <a href='//facebook.com' data-subnav={true} data-color='rgb(62, 86, 155)'><img src='/img/facebook.svg'/></a>
             <a href='//sub.nav.link' data-subnav={true} data-color='rgb(229, 26, 0)'>sub-nav-link</a>
-            <div data-submenu={true} ><a href='/login' title='login'>登入</a></div>
+            <div data-submenu_button={true} data-submenu_key='login'><span title='login'>設定</span></div>
+            <div data-submenu_button={true} data-submenu_key='logpeople'><span title='logpeople'>紀錄</span></div>
+            <div data-submenu_item={true}  data-submenu_key='login' data-submenu_position='header'>
+                <div style={{color: 'rgb(24, 155, 202)'}}>VIP會員</div>
+            </div>
+            <div data-submenu_item={true}  data-submenu_key='login' data-submenu_position='body'>
+                <a href='/user-info' title='User Info'>修改個人資訊</a>
+            </div>
+            <div data-submenu_item={true}  data-submenu_key='login' data-submenu_position='body'>
+                <a href='/change-password' title='User Info'>更改密碼</a>
+            </div>
+            <div data-submenu_item={true}  data-submenu_key='login' data-submenu_position='footer'>
+                <a href='/logout' title='Logout'>登出</a>
+            </div>
+            <div data-submenu_item={true} data-submenu_key='logpeople'>
+                <a href='/pay-history' title='Pay History'>購買紀錄</a>
+            </div>
         </HeaderBar>
     </div>;
 }
