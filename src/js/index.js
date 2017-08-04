@@ -11,7 +11,7 @@ class HeaderBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isMenuOpen: false, submenuOpenKey: '',
+            isMenuOpen: false, isSubmenuOpen: false, submenuOpenKey: '',
             collapseMenuSubmenuHeight: 0, collapseMenuSubmenuId: Math.random(),
         };
         this.openMenu = this.openMenu.bind(this);
@@ -29,21 +29,23 @@ class HeaderBar extends React.Component {
     }
     openMenu() { this.setState({isMenuOpen: true}); }
     closeMenu() { this.setState({isMenuOpen: false}); }
-    openSubmenu(e) { this.setState({submenuOpenKey: this.getSubmenuKey(e.target)}); }
-    closeSubmenu(e) { this.setState({submenuOpenKey: ''}); }
+    openSubmenu(e) { this.setState({isSubmenuOpen: true, submenuOpenKey: this.getSubmenuKey(e.target)}); }
+    closeSubmenu(e) { this.setState({isSubmenuOpen: false}); }
     componentDidUpdate() {
-        const { collapseMenuSubmenuHeight, collapseMenuSubmenuId } = this.state;
+        const { isSubmenuOpen, collapseMenuSubmenuHeight, collapseMenuSubmenuId } = this.state;
         const submenu = document.getElementById(collapseMenuSubmenuId);
-        if(!!submenu) {
+        let resultHeight = 0;
+        if(isSubmenuOpen && !!submenu) {
             const submenuRect = submenu.getBoundingClientRect();
-            if(1 < Math.abs(submenuRect.height - collapseMenuSubmenuHeight)) {
-                this.setState({collapseMenuSubmenuHeight: submenuRect.height});
-            }
+            resultHeight = submenuRect.height;
+        }
+        if(1 < Math.abs(resultHeight - collapseMenuSubmenuHeight)) {
+            this.setState({collapseMenuSubmenuHeight: resultHeight});
         }
     }
     render() {
         const { style, logo: propsLogo, hamburger, menuCloser } = this.props;
-        const { isMenuOpen, submenuOpenKey, collapseMenuSubmenuHeight, collapseMenuSubmenuId } = this.state;
+        const { isMenuOpen, isSubmenuOpen, submenuOpenKey, collapseMenuSubmenuHeight, collapseMenuSubmenuId } = this.state;
         let { children } = this.props;
         if(!children.length) { children = [children]; }
         children = children.reduce((current, child) => {
@@ -78,16 +80,16 @@ class HeaderBar extends React.Component {
             </nav>
             {submenuButttons.map((submenuButtton, index) => {
                 const submenuKey = submenuButtton.props['data-submenu_key'];
-                const isSubmenuOpening = submenuOpenKey === submenuKey;
+                const isOpenedSubmenu = isSubmenuOpen && submenuOpenKey === submenuKey;
                 return <div className='header-bar-submenu-group' key={index}>
                     <div
-                        className={`header-bar-submenu-button${isSubmenuOpening ? ' open' : ' close'}`}
-                        onClick={isSubmenuOpening ? this.closeSubmenu : this.openSubmenu}
+                        className={`header-bar-submenu-button${isOpenedSubmenu ? ' open' : ' close'}`}
+                        onClick={isOpenedSubmenu ? this.closeSubmenu : this.openSubmenu}
                         role='button' data-submenu_key={submenuKey}
                     >
                         {submenuButtton}
                     </div>
-                    {isSubmenuOpening && <div className='header-bar-submenu-wrapper'>
+                    {isOpenedSubmenu && <div className='header-bar-submenu-wrapper'>
                         <div className='header-bar-submenu' >
                             {!!submenuItems['header'].length && <div className='header-bar-submenu-header' >
                                 {submenuItems['header'].map((submenuItem, index) => {
@@ -127,10 +129,10 @@ class HeaderBar extends React.Component {
                         <div className='header-bar-collapse-menu-submenu-buttons'>
                             {submenuButttons.map((submenuButtton, index) => {
                                 const submenuKey = submenuButtton.props['data-submenu_key'];
-                                const isSubmenuOpening = submenuOpenKey === submenuKey;
+                                const isOpenedSubmenu = isSubmenuOpen && submenuOpenKey === submenuKey;
                                 return <div
                                     className='header-bar-collapse-menu-submenu-button' key={index}
-                                    onClick={isSubmenuOpening ? this.closeSubmenu : this.openSubmenu}
+                                    onClick={isOpenedSubmenu ? this.closeSubmenu : this.openSubmenu}
                                     role='button' data-submenu_key={submenuKey}
                                 >
                                     {submenuButtton}
