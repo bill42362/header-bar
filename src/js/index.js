@@ -53,7 +53,7 @@ class HeaderBar extends React.Component {
             else { return [...current, ...child]; }
         }, []);
         const childLogo = children.filter(child => { return child.props['data-logo']; })[0];
-        const navs = children.filter(child => { return child.props['data-nav']; });
+        const navs = children.filter(child => { return child.props['data-nav'] || child.props['data-childnav']; });
         const subnavs = children.filter(child => { return child.props['data-subnav']; });
         const submenuButttons = children.filter(child => { return child.props['data-submenu_button']; });
         const submenuItems = children
