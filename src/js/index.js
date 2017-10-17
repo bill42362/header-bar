@@ -109,6 +109,11 @@ class HeaderBar extends React.Component {
             {submenuButttons.map((submenuButtton, index) => {
                 const submenuKey = submenuButtton.props['data-submenu_key'];
                 const isOpenedSubmenu = isSubmenuOpen && submenuOpenKey === submenuKey;
+                const shouldDisplaySubmenu = isOpenedSubmenu && 0 !== (
+                    submenuItems['header'].length
+                    + submenuItems['body'].length
+                    + submenuItems['footer'].length
+                );
                 return <div className='header-bar-submenu-group' key={index}>
                     <div
                         className={`header-bar-submenu-button${isOpenedSubmenu ? ' open' : ' close'}`}
@@ -117,7 +122,7 @@ class HeaderBar extends React.Component {
                     >
                         {submenuButtton}
                     </div>
-                    {isOpenedSubmenu && <div className='header-bar-submenu-wrapper'>
+                    {shouldDisplaySubmenu && <div className='header-bar-submenu-wrapper'>
                         <div className='header-bar-submenu' >
                             {!!submenuItems['header'].length && <div className='header-bar-submenu-header' >
                                 {submenuItems['header'].map((submenuItem, index) => {
