@@ -1,6 +1,7 @@
 // index.js
 'use strict';
 import React from 'react';
+import ResizeSensor from 'css-element-queries/src/ResizeSensor';
 import HeaderBarNavItem from './HeaderBarNavItem.js';
 import HeaderBarSubnavItem from './HeaderBarSubnavItem.js';
 
@@ -12,12 +13,14 @@ class HeaderBar extends React.Component {
         super(props);
         this.state = {
             isMenuOpen: false, isSubmenuOpen: false, submenuOpenKey: '',
+            shouldDisplaySmallStyle: false, isDisplayStyleUpdated: false,
             collapseMenuSubmenuHeight: 0, collapseMenuSubmenuId: Math.random(),
         };
         this.openMenu = this.openMenu.bind(this);
         this.closeMenu = this.closeMenu.bind(this);
         this.openSubmenu = this.openSubmenu.bind(this);
         this.closeSubmenu = this.closeSubmenu.bind(this);
+        this.updateShouldDisplaySmallStyle = this.updateShouldDisplaySmallStyle.bind(this);
     }
     getSubmenuKey(element) {
         let key = undefined, target = element;
@@ -43,9 +46,32 @@ class HeaderBar extends React.Component {
             this.setState({collapseMenuSubmenuHeight: resultHeight});
         }
     }
+    updateShouldDisplaySmallStyle() {
+        const NAV_MARGIN_RIGHT = 20;
+        const navsWidth = this.navs.getBoundingClientRect().width;
+        const navChildrenWidthSum = Array.prototype.filter.call(this.navs.children, nav => {
+            return 'header-bar-nav-item' === nav.className;
+        })
+        .reduce((current, nav) => {
+            const childWidth = nav.getBoundingClientRect().width + NAV_MARGIN_RIGHT;
+            return current + childWidth;
+        }, 0);
+        if(navChildrenWidthSum > navsWidth && !this.state.shouldDisplaySmallStyle) {
+            this.setState({shouldDisplaySmallStyle: true});
+        }
+        if(!this.state.isDisplayStyleUpdated) { this.setState({isDisplayStyleUpdated: true}); }
+    }
+    componentDidMount() {
+        new ResizeSensor(this.navs, this.updateShouldDisplaySmallStyle);
+        this.updateShouldDisplaySmallStyle();
+    }
     render() {
         const { style, logo: propsLogo, hamburger, menuCloser } = this.props;
-        const { isMenuOpen, isSubmenuOpen, submenuOpenKey, collapseMenuSubmenuHeight, collapseMenuSubmenuId } = this.state;
+        const {
+            isMenuOpen, isSubmenuOpen, submenuOpenKey,
+            shouldDisplaySmallStyle, isDisplayStyleUpdated,
+            collapseMenuSubmenuHeight, collapseMenuSubmenuId
+        } = this.state;
         let { children } = this.props;
         if(!children.length) { children = [children]; }
         children = children.reduce((current, child) => {
@@ -65,12 +91,14 @@ class HeaderBar extends React.Component {
                 current[position].push(child);
                 return current;
             }, {header: [], body: [], footer: []});
-        return <div className='header-bar' style={style}>
+        const smallHeaderBarClassName = shouldDisplaySmallStyle ? ' header-bar-small' : '';
+        const navOpacityClassName = isDisplayStyleUpdated ? '' : ' header-bar-transparent';
+        return <div className={`header-bar${smallHeaderBarClassName}${navOpacityClassName}`} style={style}>
             {(propsLogo && !childLogo) && <img
                 className={'header-bar-logo ' + propsLogo.className} {...propsLogo}
             ></img>}
             {!!childLogo && <div className='header-bar-logo'>{childLogo}</div>}
-            <nav className='header-bar-nav'>
+            <nav className='header-bar-nav' ref={navs => this.navs = navs}>
                 {navs.filter(nav => !nav.props['data-childnav']).map((nav, index) => {
                     return <HeaderBarNavItem nav={nav} key={index} />;
                 })}
@@ -81,6 +109,11 @@ class HeaderBar extends React.Component {
             {submenuButttons.map((submenuButtton, index) => {
                 const submenuKey = submenuButtton.props['data-submenu_key'];
                 const isOpenedSubmenu = isSubmenuOpen && submenuOpenKey === submenuKey;
+                const shouldDisplaySubmenu = isOpenedSubmenu && 0 !== (
+                    submenuItems['header'].length
+                    + submenuItems['body'].length
+                    + submenuItems['footer'].length
+                );
                 return <div className='header-bar-submenu-group' key={index}>
                     <div
                         className={`header-bar-submenu-button${isOpenedSubmenu ? ' open' : ' close'}`}
@@ -89,7 +122,7 @@ class HeaderBar extends React.Component {
                     >
                         {submenuButtton}
                     </div>
-                    {isOpenedSubmenu && <div className='header-bar-submenu-wrapper'>
+                    {shouldDisplaySubmenu && <div className='header-bar-submenu-wrapper'>
                         <div className='header-bar-submenu' >
                             {!!submenuItems['header'].length && <div className='header-bar-submenu-header' >
                                 {submenuItems['header'].map((submenuItem, index) => {
