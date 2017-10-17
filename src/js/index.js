@@ -13,7 +13,7 @@ class HeaderBar extends React.Component {
         super(props);
         this.state = {
             isMenuOpen: false, isSubmenuOpen: false, submenuOpenKey: '',
-            shouldDisplaySmallStyle: false,
+            shouldDisplaySmallStyle: false, isDisplayStyleUpdated: false,
             collapseMenuSubmenuHeight: 0, collapseMenuSubmenuId: Math.random(),
         };
         this.openMenu = this.openMenu.bind(this);
@@ -59,15 +59,17 @@ class HeaderBar extends React.Component {
         if(navChildrenWidthSum > navsWidth && !this.state.shouldDisplaySmallStyle) {
             this.setState({shouldDisplaySmallStyle: true});
         }
+        if(!this.state.isDisplayStyleUpdated) { this.setState({isDisplayStyleUpdated: true}); }
     }
     componentDidMount() {
         new ResizeSensor(this.navs, this.updateShouldDisplaySmallStyle);
+        this.updateShouldDisplaySmallStyle();
     }
     render() {
         const { style, logo: propsLogo, hamburger, menuCloser } = this.props;
         const {
             isMenuOpen, isSubmenuOpen, submenuOpenKey,
-            shouldDisplaySmallStyle,
+            shouldDisplaySmallStyle, isDisplayStyleUpdated,
             collapseMenuSubmenuHeight, collapseMenuSubmenuId
         } = this.state;
         let { children } = this.props;
@@ -90,7 +92,8 @@ class HeaderBar extends React.Component {
                 return current;
             }, {header: [], body: [], footer: []});
         const smallHeaderBarClassName = shouldDisplaySmallStyle ? ' header-bar-small' : '';
-        return <div className={`header-bar${smallHeaderBarClassName}`} style={style}>
+        const navOpacityClassName = isDisplayStyleUpdated ? '' : ' header-bar-transparent';
+        return <div className={`header-bar${smallHeaderBarClassName}${navOpacityClassName}`} style={style}>
             {(propsLogo && !childLogo) && <img
                 className={'header-bar-logo ' + propsLogo.className} {...propsLogo}
             ></img>}

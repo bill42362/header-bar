@@ -57,6 +57,11 @@ div.header-bar {
         content: "";
     }
     &.header-bar-small { .header-bar-small(); }
+    &.header-bar-transparent {
+        nav.header-bar-nav { opacity: 0; }
+        nav.header-bar-subnav { opacity: 0; }
+        div.header-bar-submenu-group { opacity: 0; }
+    }
     img.header-bar-logo {
         flex: none;
         margin-right: 28px;
