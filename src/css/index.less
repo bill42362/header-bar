@@ -1,4 +1,5 @@
 // index.less
+@import './header-bar-small.less';
 @headerBarHeight: 40px;
 .animation(@name, @duration: 3s, @delay: 0s, @ease: ease-out) {
     -webkit-animation: @name @duration @ease @delay;
@@ -54,6 +55,12 @@ div.header-bar {
         flex: none;
         width: 30px;
         content: "";
+    }
+    &.header-bar-small { .header-bar-small(); }
+    &.header-bar-transparent {
+        nav.header-bar-nav { opacity: 0; }
+        nav.header-bar-subnav { opacity: 0; }
+        div.header-bar-submenu-group { opacity: 0; }
     }
     img.header-bar-logo {
         flex: none;
@@ -169,178 +176,6 @@ div.header-bar {
 
 @media (max-width: 767px) {
     div.header-bar {
-        &::before {
-            flex: none;
-            width: 20px;
-            content: "";
-        }
-        &::after {
-            flex: none;
-            width: 20px;
-            content: "";
-        }
-        nav.header-bar-nav { display: none; }
-        nav.header-bar-subnav { display: none; }
-        div.header-bar-submenu-group { display: none; }
-        div.header-bar-collapse {
-            display: flex;
-            flex: auto;
-            text-align: right;
-            div.header-bar-collapse-placeholder { flex: auto; }
-            img.header-bar-collapse-hamburger {
-                flex: none;
-                width: 25px;
-                cursor: pointer;
-            }
-            div.header-bar-collapse-hamburger {
-                flex: none;
-                display: inline-block;
-                font-size: 27px;
-                cursor: pointer;
-            }
-        }
-        div.header-bar-collapse-menu-wrapper {
-            display: block;
-            position: fixed;
-            width: 100%; height: 100%;
-            top: 0px; left: 0px;
-            div.header-bar-collapse-menu-frame {
-                position: absolute;
-                width: 100%; height: 100%;
-                top: 0px; left: 0px;
-                background-color: white;
-                opacity: 0.5;
-                cursor: pointer;
-                .animation(fadeInHalf, .6s, 0s, ease);
-            }
-            div.header-bar-collapse-menu {
-                display: flex;
-                flex-direction: column;
-                position: absolute;
-                max-width: 100%;
-                min-height: 400px; max-height: 100%;
-                right: 0px; top: 0px;
-                background-color: rgb(12, 12, 12);
-                line-height: 2.5em;
-                .animation(fadeIn, .6s, 0s, ease);
-                div.header-bar-collapse-menu-header {
-                    flex: none;
-                    display: flex;
-                    padding-left: 15px;
-                    align-items: center;
-                    border-bottom: 5px solid rgb(221, 221, 221);
-                    height: @headerBarHeight;
-                    div.header-bar-collapse-menu-submenu-buttons {
-                        flex: auto;
-                        div.header-bar-collapse-menu-submenu-button {
-                            display: inline-block;
-                            margin-right: 10px;
-                            font-size: 14px;
-                            cursor: pointer;
-                            img {
-                                border-radius: 2px;
-                                width: auto; height: 1.2em;
-                                margin-right: 5px;
-                                vertical-align: middle;
-                            }
-                        }
-                    }
-                    div.header-bar-collapse-menu-closer {
-                        flex: none;
-                        margin-left: auto;
-                        margin-right: 20px;
-                        font-size: 24px;
-                        line-height: @headerBarHeight;
-                        cursor: pointer;
-                    }
-                    img.header-bar-collapse-menu-closer {
-                        flex: 0;
-                        width: auto; height: 24px;
-                        margin-left: auto;
-                        margin-right: 20px;
-                        cursor: pointer;
-                    }
-                }
-                div.header-bar-collapse-menu-submenu-wrapper {
-                    flex: 0;
-                    position: relative;
-                    height: 0px;
-                    overflow: scroll;
-                    transition: height .6s ease;
-                    div.header-bar-collapse-menu-submenu {
-                        position: absolute;
-                        width: 100%;
-                        background-color: rgb(221, 221, 221);
-                        padding: 0px 15px;
-                        color: black;
-                        font-size: 14px;
-                        font-weight: 500;
-                    }
-                }
-                nav.header-bar-collapse-menu-nav {
-                    flex: auto;
-                    padding: 20px 15px;
-                    overflow: scroll;
-                    div.header-bar-collapse-nav-item {
-                        padding: 30px 0px 10px;
-                        color: white;
-                        height: 20px;
-                        &:first-of-type { padding-top: 0px; }
-                        span.header-bar-collapse-nav-item-left-bar {
-                            display: inline-block;
-                            width: 2px; height: 20px;
-                            background-color: gray;
-                            vertical-align: top;
-                        }
-                        a {
-                            display: inline;
-                            padding-left: 7px; 
-                            color: inherit;
-                            font-size: 20px;
-                            line-height: 20px;
-                            vertical-align: top;
-                        }
-                    }
-                    div.header-bar-collapse-childnav-item {
-                        padding: 5px 0px 5px 25px;
-                        font-size: 16px;
-                        color: white;
-                        img:first-of-type {
-                            margin-right: 0.5em;
-                            width: auto; height: 2em;
-                            vertical-align: middle;
-                        }
-                        a {
-                            display: block;
-                            padding-left: 7px; 
-                            color: inherit;
-                            line-height: 20px;
-                        }
-                    }
-                }
-                nav.header-bar-collapse-menu-subnav {
-                    flex: none;
-                    padding: 20px 45px;
-                    text-align: center;
-                    div.header-bar-collapse-subnav-item {
-                        display: inline-block;
-                        border-radius: 6px;
-                        margin: 0px 10px;
-                        height: 28px;
-                        vertical-align: bottom;
-                        a {
-                            display: inline-block;
-                            height: 28px; width: 100%;
-                            font-size: 28px;
-                            line-height: 28px;
-                            color: white;
-                            img {
-                                height: 100%; width: auto;
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        .header-bar-small();
     }
 }

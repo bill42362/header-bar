@@ -1,6 +1,7 @@
 // App.js
 'use strict'
 import HeaderBar from 'header-bar';
+// import HeaderBar from '../../src/js/index.js';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -25,6 +26,16 @@ var onReadyStateChange = function onReadyStateChange(e) {
                             <img src='https://d2z53ag52zrc0n.cloudfront.net/PBTV/media/cb.png'/>中信兄弟主場賽事
                         </a>,
                         <a key='2' href='//localhost' data-childnav={true} >富邦悍將主場賽事</a>,
+                        <a key='3' href='//localhost' data-nav={true} data-color='rgb(226, 147, 192)' data-match='local(.*)'>圓夢</a>,
+                        <a key='3' href='//localhost' data-nav={true} data-color='rgb(226, 147, 192)' data-match='local(.*)'>圓夢</a>,
+                        <a key='3' href='//localhost' data-nav={true} data-color='rgb(226, 147, 192)' data-match='local(.*)'>圓夢</a>,
+                        <a key='3' href='//localhost' data-nav={true} data-color='rgb(226, 147, 192)' data-match='local(.*)'>圓夢</a>,
+                        <a key='3' href='//localhost' data-nav={true} data-color='rgb(226, 147, 192)' data-match='local(.*)'>圓夢</a>,
+                        <a key='3' href='//localhost' data-nav={true} data-color='rgb(226, 147, 192)' data-match='local(.*)'>圓夢</a>,
+                        <a key='3' href='//localhost' data-nav={true} data-color='rgb(226, 147, 192)' data-match='local(.*)'>圓夢</a>,
+                        <a key='3' href='//localhost' data-nav={true} data-color='rgb(226, 147, 192)' data-match='local(.*)'>圓夢</a>,
+                        <a key='3' href='//localhost' data-nav={true} data-color='rgb(226, 147, 192)' data-match='local(.*)'>圓夢</a>,
+                        <a key='3' href='//localhost' data-nav={true} data-color='rgb(226, 147, 192)' data-match='local(.*)'>圓夢</a>,
                         <a key='3' href='//localhost' data-nav={true} data-color='rgb(226, 147, 192)' data-match='local(.*)'>圓夢</a>,
                         <a key='4' href='//localhost' data-nav={true} data-color='rgb(66, 169, 140)' data-match='ticket'>購票</a>
                     ]}
