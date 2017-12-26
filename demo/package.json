@@ -5,6 +5,7 @@
   "main": "js/App.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start:auto": "nodemon --ignore dist --watch ../src --watch . --exec 'gulp; ./app.js'",
     "start": "gulp; ./app.js"
   },
   "keywords": [
@@ -26,6 +27,7 @@
     "gulp-less": "^3.3.0",
     "gulp-util": "^3.0.8",
     "header-bar": "*",
+    "nodemon": "^1.14.3",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "vinyl-buffer": "^1.0.0",
