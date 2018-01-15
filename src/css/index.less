@@ -1,32 +1,6 @@
 // index.less
+@import './base.less';
 @import './header-bar-small.less';
-@headerBarHeight: 40px;
-.animation(@name, @duration: 3s, @delay: 0s, @ease: ease-out) {
-    -webkit-animation: @name @duration @ease @delay;
-    -moz-animation:    @name @duration @ease @delay;
-    -ms-animation:     @name @duration @ease @delay;
-    -o-animation:     @name @duration @ease @delay;
-    animation:     @name @duration @ease @delay;
-}
-.keyframes (@name, @rules) {
-    @-webkit-keyframes ~'@{name}' { @rules(); }
-    @-moz-keyframes ~'@{name}' { @rules(); }
-    @-ms-keyframes ~'@{name}' { @rules(); }
-    @-o-keyframes ~'@{name}' { @rules(); }
-    @keyframes ~'@{name}' { @rules(); }
-}
-.keyframes(fadeInHalf, {
-    0% { opacity: 0; }
-    100% { opacity: 0.5; }
-});
-.keyframes(fadeIn, {
-    0% { top: -15px; opacity: 0; }
-    100% { top: 0px; opacity: 1; }
-});
-.keyframes(submenuFadeIn, {
-    0% { right: -15px; opacity: 0; }
-    100% { right: 0px; opacity: 1; }
-});
 div.header-bar {
     a {
         text-decoration: none;
@@ -78,48 +52,8 @@ div.header-bar {
             width: auto;
         }
     }
-    nav.header-bar-nav {
-        flex: auto;
-        div.header-bar-nav-item {
-            display: inline-block;
-            margin-right: 20px;
-            height: @headerBarHeight - 3px;
-            color: white;
-            a {
-                display: inline-block;
-                padding: 0px 8px;
-                font-size: 12px;
-                color: inherit;
-                line-height: @headerBarHeight - 3px;
-                transition: color .6s ease;
-                &:hover { font-weight: 400; }
-            }
-        }
-    }
-    nav.header-bar-subnav {
-        flex: none;
-        div.header-bar-subnav-item {
-            display: inline-block;
-            margin-left: 5px;
-            height: 100%;
-            color: white;
-            a {
-                display: inline-block;
-                padding: 0px 8px;
-                font-size: 12px;
-                color: inherit;
-                line-height: @headerBarHeight;
-                transition: color .6s ease;
-                &:hover { font-weight: 400; }
-                img {
-                    border-radius: 2px;
-                    width: auto; height: 1.5em;
-                    vertical-align: middle;
-                    transition: background-color .6s ease;
-                }
-            }
-        }
-    }
+    nav.header-bar-nav { flex: auto; }
+    nav.header-bar-subnav { flex: none; }
     div.header-bar-submenu-group {
         position: relative;
         display: flex;
