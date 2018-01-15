@@ -5,6 +5,8 @@ import ResizeSensor from 'css-element-queries/src/ResizeSensor';
 import HeaderBarNavItem from './HeaderBarNavItem.js';
 import HeaderBarSubnavItem from './HeaderBarSubnavItem.js';
 
+import '../css/index.less';
+
 const defaultProps = {
 };
 
