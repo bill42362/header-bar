@@ -98,6 +98,7 @@ class HeaderBar extends React.Component {
         const childLogo = children.filter(child => { return child.props['data-logo']; })[0];
         const navs = children.filter(child => { return child.props['data-nav'] || child.props['data-childnav']; });
         const subnavs = children.filter(child => { return child.props['data-subnav']; });
+        const buttons = children.filter(child => { return child.props['data-submenu_button'] || child.props['data-button']; });
         const submenuButttons = children.filter(child => { return child.props['data-submenu_button']; });
         const submenuItems = children
             .filter(child => {
@@ -123,16 +124,20 @@ class HeaderBar extends React.Component {
             <nav className='header-bar-subnav'>
                 {subnavs.map((subnav, index) => (<HeaderBarSubnavItem nav={subnav} key={index} />))}
             </nav>
-            {submenuButttons.map((submenuButtton, index) => {
-                const submenuKey = submenuButtton.props['data-submenu_key'];
-                const isOpenedSubmenu = isSubmenuOpen && submenuOpenKey === submenuKey;
-                return <div
-                    className={`header-bar-submenu-button${isOpenedSubmenu ? ' header-bar-open' : ' header-bar-close'}`}
-                    key={index} onClick={isOpenedSubmenu ? this.closeSubmenu : this.openSubmenu}
-                    role='button' data-submenu_key={submenuKey}
-                >
-                    {submenuButtton}
-                </div>;
+            {buttons.map((button, index) => {
+                if(button.props['data-button']) {
+                    return <div className='header-bar-button' key={index} role='button' >{button}</div>;
+                } else {
+                    const submenuKey = button.props['data-submenu_key'];
+                    const isOpenedSubmenu = isSubmenuOpen && submenuOpenKey === submenuKey;
+                    return <div
+                        className={`header-bar-submenu-button${isOpenedSubmenu ? ' header-bar-open' : ' header-bar-close'}`}
+                        key={index} onClick={isOpenedSubmenu ? this.closeSubmenu : this.openSubmenu}
+                        role='button' data-submenu_key={submenuKey}
+                    >
+                        {button}
+                    </div>;
+                }
             })}
             {isSubmenuOpen && <div className='header-bar-submenu-wrapper' onClick={this.closeSubmenuFromWrapper}>
                 <div className='header-bar-submenu' style={{right: submenuRight}}>
@@ -155,16 +160,20 @@ class HeaderBar extends React.Component {
             </div>}
             <div className='header-bar-collapse'>
                 <div className='header-bar-collapse-placeholder'></div>
-                {submenuButttons.map((submenuButtton, index) => {
-                    const submenuKey = submenuButtton.props['data-submenu_key'];
-                    const isOpenedSubmenu = isSubmenuOpen && submenuOpenKey === submenuKey;
-                    return <div
-                        className={`header-bar-collapse-submenu-button${isOpenedSubmenu ? ' header-bar-open' : ' header-bar-close'}`}
-                        key={index} onClick={isOpenedSubmenu ? this.closeSubmenu : this.openSubmenu}
-                        role='button' data-submenu_key={submenuKey}
-                    >
-                        {submenuButtton}
-                    </div>;
+                {buttons.map((button, index) => {
+                    if(button.props['data-button']) {
+                        return <div className='header-bar-collapse-button' key={index} role='button' >{button}</div>;
+                    } else {
+                        const submenuKey = button.props['data-submenu_key'];
+                        const isOpenedSubmenu = isSubmenuOpen && submenuOpenKey === submenuKey;
+                        return <div
+                            className={`header-bar-collapse-submenu-button${isOpenedSubmenu ? ' header-bar-open' : ' header-bar-close'}`}
+                            key={index} onClick={isOpenedSubmenu ? this.closeSubmenu : this.openSubmenu}
+                            role='button' data-submenu_key={submenuKey}
+                        >
+                            {button}
+                        </div>;
+                    }
                 })}
                 {!!hamburger && <img
                     {...hamburger}

@@ -36,6 +36,7 @@ var onReadyStateChange = function onReadyStateChange(e) {
                         <img src='/img/line.svg' style={{height: '1.8em', borderRadius: '0.9em'}} />
                         <span title='login'>Bill</span>
                     </div>
+                    <div data-button={true} ><span>按鈕</span></div>
                     <div data-submenu_button={true} data-submenu_key='logpeople'><span title='logpeople'>紀錄</span></div>
                     <div data-submenu_item={true}  data-submenu_key='login' data-submenu_position='header'>
                         <div style={{color: 'rgb(24, 155, 202)'}}>VIP會員</div>
