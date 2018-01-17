@@ -27,16 +27,6 @@ var onReadyStateChange = function onReadyStateChange(e) {
                         </a>,
                         <a key='2' href='//localhost' data-childnav={true} >富邦悍將主場賽事</a>,
                         <a key='3' href='//localhost' data-nav={true} data-color='rgb(226, 147, 192)' data-match='local(.*)'>圓夢</a>,
-                        <a key='3' href='//localhost' data-nav={true} data-color='rgb(226, 147, 192)' data-match='local(.*)'>圓夢</a>,
-                        <a key='3' href='//localhost' data-nav={true} data-color='rgb(226, 147, 192)' data-match='local(.*)'>圓夢</a>,
-                        <a key='3' href='//localhost' data-nav={true} data-color='rgb(226, 147, 192)' data-match='local(.*)'>圓夢</a>,
-                        <a key='3' href='//localhost' data-nav={true} data-color='rgb(226, 147, 192)' data-match='local(.*)'>圓夢</a>,
-                        <a key='3' href='//localhost' data-nav={true} data-color='rgb(226, 147, 192)' data-match='local(.*)'>圓夢</a>,
-                        <a key='3' href='//localhost' data-nav={true} data-color='rgb(226, 147, 192)' data-match='local(.*)'>圓夢</a>,
-                        <a key='3' href='//localhost' data-nav={true} data-color='rgb(226, 147, 192)' data-match='local(.*)'>圓夢</a>,
-                        <a key='3' href='//localhost' data-nav={true} data-color='rgb(226, 147, 192)' data-match='local(.*)'>圓夢</a>,
-                        <a key='3' href='//localhost' data-nav={true} data-color='rgb(226, 147, 192)' data-match='local(.*)'>圓夢</a>,
-                        <a key='3' href='//localhost' data-nav={true} data-color='rgb(226, 147, 192)' data-match='local(.*)'>圓夢</a>,
                         <a key='4' href='//localhost' data-nav={true} data-color='rgb(66, 169, 140)' data-match='ticket'>購票</a>
                     ]}
                     <a href='//facebook.com' data-subnav={true} data-color='rgb(62, 86, 155)'><img src='/img/facebook.svg'/></a>

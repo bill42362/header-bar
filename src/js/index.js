@@ -14,7 +14,7 @@ class HeaderBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isMenuOpen: false, isSubmenuOpen: false, submenuOpenKey: '',
+            isMenuOpen: false, isSubmenuOpen: false, submenuOpenKey: '', submenuRight: 0,
             shouldDisplaySmallStyle: false, isDisplayStyleUpdated: false,
             collapseMenuSubmenuHeight: 0, collapseMenuSubmenuId: Math.random(),
         };
@@ -22,20 +22,35 @@ class HeaderBar extends React.Component {
         this.closeMenu = this.closeMenu.bind(this);
         this.openSubmenu = this.openSubmenu.bind(this);
         this.closeSubmenu = this.closeSubmenu.bind(this);
+        this.closeSubmenuFromWrapper = this.closeSubmenuFromWrapper.bind(this);
         this.updateShouldDisplaySmallStyle = this.updateShouldDisplaySmallStyle.bind(this);
     }
-    getSubmenuKey(element) {
-        let key = undefined, target = element;
-        while(!key && !!target) {
-            key = target.getAttribute('data-submenu_key');
+    getSubmenuElement(element) {
+        let resultElement = undefined, target = element;
+        while(!resultElement && !!target) {
+            resultElement = target.className.match('submenu-button') ? target : undefined;
             target = target.parentNode;
         }
-        return key;
+        return resultElement;
     }
     openMenu() { this.setState({isMenuOpen: true}); }
     closeMenu() { this.setState({isMenuOpen: false}); }
-    openSubmenu(e) { this.setState({isSubmenuOpen: true, submenuOpenKey: this.getSubmenuKey(e.target)}); }
     closeSubmenu(e) { this.setState({isSubmenuOpen: false}); }
+    closeSubmenuFromWrapper(e) {
+        const isWrapper = e.target.className.match('header-bar-submenu-wrapper');
+        if(isWrapper) { this.closeSubmenu(); }
+    }
+    openSubmenu(e) {
+        const buttonElement = this.getSubmenuElement(e.target);
+        if(buttonElement) {
+            const buttonRect = buttonElement.getBoundingClientRect();
+            this.setState({
+                isSubmenuOpen: true,
+                submenuOpenKey: buttonElement.getAttribute('data-submenu_key'),
+                submenuRight: window.innerWidth - buttonRect.right,
+            });
+        }
+    }
     componentDidUpdate() {
         const { isSubmenuOpen, collapseMenuSubmenuHeight, collapseMenuSubmenuId } = this.state;
         const submenu = document.getElementById(collapseMenuSubmenuId);
@@ -70,7 +85,7 @@ class HeaderBar extends React.Component {
     render() {
         const { style, logo: propsLogo, hamburger, menuCloser } = this.props;
         const {
-            isMenuOpen, isSubmenuOpen, submenuOpenKey,
+            isMenuOpen, isSubmenuOpen, submenuOpenKey, submenuRight,
             shouldDisplaySmallStyle, isDisplayStyleUpdated,
             collapseMenuSubmenuHeight, collapseMenuSubmenuId
         } = this.state;
@@ -111,42 +126,46 @@ class HeaderBar extends React.Component {
             {submenuButttons.map((submenuButtton, index) => {
                 const submenuKey = submenuButtton.props['data-submenu_key'];
                 const isOpenedSubmenu = isSubmenuOpen && submenuOpenKey === submenuKey;
-                const shouldDisplaySubmenu = isOpenedSubmenu && 0 !== (
-                    submenuItems['header'].length
-                    + submenuItems['body'].length
-                    + submenuItems['footer'].length
-                );
-                return <div className='header-bar-submenu-group' key={index}>
-                    <div
-                        className={`header-bar-submenu-button${isOpenedSubmenu ? ' open' : ' close'}`}
-                        onClick={isOpenedSubmenu ? this.closeSubmenu : this.openSubmenu}
+                return <div
+                    className={`header-bar-submenu-button${isOpenedSubmenu ? ' header-bar-open' : ' header-bar-close'}`}
+                    key={index} onClick={isOpenedSubmenu ? this.closeSubmenu : this.openSubmenu}
+                    role='button' data-submenu_key={submenuKey}
+                >
+                    {submenuButtton}
+                </div>;
+            })}
+            {isSubmenuOpen && <div className='header-bar-submenu-wrapper' onClick={this.closeSubmenuFromWrapper}>
+                <div className='header-bar-submenu' style={{right: submenuRight}}>
+                    {!!submenuItems.header.length && <div className='header-bar-submenu-header' >
+                        {submenuItems.header.map((submenuItem, index) => {
+                            return <div className='header-bar-submenu-item' key={index}>{submenuItem}</div>;
+                        })}
+                    </div>}
+                    <div className='header-bar-submenu-body' >
+                        {submenuItems.body.map((submenuItem, index) => {
+                            return <div className='header-bar-submenu-item' key={index}>{submenuItem}</div>;
+                        })}
+                    </div>
+                    {!!submenuItems.footer.length && <div className='header-bar-submenu-footer' >
+                        {submenuItems.footer.map((submenuItem, index) => {
+                            return <div className='header-bar-submenu-item' key={index}>{submenuItem}</div>;
+                        })}
+                    </div>}
+                </div>
+            </div>}
+            <div className='header-bar-collapse'>
+                <div className='header-bar-collapse-placeholder'></div>
+                {submenuButttons.map((submenuButtton, index) => {
+                    const submenuKey = submenuButtton.props['data-submenu_key'];
+                    const isOpenedSubmenu = isSubmenuOpen && submenuOpenKey === submenuKey;
+                    return <div
+                        className={`header-bar-collapse-submenu-button${isOpenedSubmenu ? ' header-bar-open' : ' header-bar-close'}`}
+                        key={index} onClick={isOpenedSubmenu ? this.closeSubmenu : this.openSubmenu}
                         role='button' data-submenu_key={submenuKey}
                     >
                         {submenuButtton}
-                    </div>
-                    {shouldDisplaySubmenu && <div className='header-bar-submenu-wrapper'>
-                        <div className='header-bar-submenu' >
-                            {!!submenuItems['header'].length && <div className='header-bar-submenu-header' >
-                                {submenuItems['header'].map((submenuItem, index) => {
-                                    return <div className='header-bar-submenu-item' key={index}>{submenuItem}</div>;
-                                })}
-                            </div>}
-                            <div className='header-bar-submenu-body' >
-                                {submenuItems['body'].map((submenuItem, index) => {
-                                    return <div className='header-bar-submenu-item' key={index}>{submenuItem}</div>;
-                                })}
-                            </div>
-                            {!!submenuItems['footer'].length && <div className='header-bar-submenu-footer' >
-                                {submenuItems['footer'].map((submenuItem, index) => {
-                                    return <div className='header-bar-submenu-item' key={index}>{submenuItem}</div>;
-                                })}
-                            </div>}
-                        </div>
-                    </div>}
-                </div>;
-            })}
-            <div className='header-bar-collapse'>
-                <div className='header-bar-collapse-placeholder'></div>
+                    </div>;
+                })}
                 {!!hamburger && <img
                     {...hamburger}
                     className='header-bar-collapse-hamburger'
@@ -161,19 +180,6 @@ class HeaderBar extends React.Component {
                 <div className='header-bar-collapse-menu-frame' role='button' onClick={this.closeMenu}></div>
                 <div className='header-bar-collapse-menu'>
                     <div className='header-bar-collapse-menu-header'>
-                        <div className='header-bar-collapse-menu-submenu-buttons'>
-                            {submenuButttons.map((submenuButtton, index) => {
-                                const submenuKey = submenuButtton.props['data-submenu_key'];
-                                const isOpenedSubmenu = isSubmenuOpen && submenuOpenKey === submenuKey;
-                                return <div
-                                    className='header-bar-collapse-menu-submenu-button' key={index}
-                                    onClick={isOpenedSubmenu ? this.closeSubmenu : this.openSubmenu}
-                                    role='button' data-submenu_key={submenuKey}
-                                >
-                                    {submenuButtton}
-                                </div>;
-                            })}
-                        </div>
                         {!!menuCloser && <img
                             {...menuCloser}
                             className='header-bar-collapse-menu-closer'
@@ -183,25 +189,6 @@ class HeaderBar extends React.Component {
                             className='header-bar-collapse-menu-closer'
                             role='button' onClick={this.closeMenu}
                         >✖︎</div>}
-                    </div>
-                    <div className='header-bar-collapse-menu-submenu-wrapper' style={{height: collapseMenuSubmenuHeight}} >
-                        <div className='header-bar-collapse-menu-submenu' id={collapseMenuSubmenuId} >
-                            {!!submenuItems['header'].length && <div className='header-bar-collapse-menu-submenu-header' >
-                                {submenuItems['header'].map((submenuItem, index) => {
-                                    return <div className='header-bar-collapse-menu-submenu-item' key={index}>{submenuItem}</div>;
-                                })}
-                            </div>}
-                            <div className='header-bar-collapse-menu-submenu-body' >
-                                {submenuItems['body'].map((submenuItem, index) => {
-                                    return <div className='header-bar-collapse-menu-submenu-item' key={index}>{submenuItem}</div>;
-                                })}
-                            </div>
-                            {!!submenuItems['footer'].length && <div className='header-bar-collapse-menu-submenu-footer' >
-                                {submenuItems['footer'].map((submenuItem, index) => {
-                                    return <div className='header-bar-collapse-menu-submenu-item' key={index}>{submenuItem}</div>;
-                                })}
-                            </div>}
-                        </div>
                     </div>
                     <nav className='header-bar-collapse-menu-nav'>
                         {navs.map((nav, index) => {
