@@ -37,7 +37,9 @@ var onReadyStateChange = function onReadyStateChange(e) {
                         <span title='login'>Bill</span>
                     </div>
                     <div data-button={true} ><span>按鈕</span></div>
-                    <div data-submenu_button={true} data-submenu_key='logpeople'><span title='logpeople'>紀錄</span></div>
+                    <div data-submenu_button={true} data-submenu_key='board' data-submenu_type='list'>
+                        <span title='board'>公告</span>
+                    </div>
                     <div data-submenu_item={true}  data-submenu_key='login' data-submenu_position='header'>
                         <div style={{color: 'rgb(24, 155, 202)'}}>VIP會員</div>
                     </div>
@@ -50,7 +52,7 @@ var onReadyStateChange = function onReadyStateChange(e) {
                     <div data-submenu_item={true}  data-submenu_key='login' data-submenu_position='footer'>
                         <a href='/logout' title='Logout'>登出</a>
                     </div>
-                    <div data-submenu_item={true} data-submenu_key='logpeople'>
+                    <div data-submenu_item={true} data-submenu_key='board'>
                         <a href='/pay-history' title='Pay History'>購買紀錄</a>
                     </div>
                 </HeaderBar>

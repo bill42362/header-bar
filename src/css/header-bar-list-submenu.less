@@ -1,0 +1,28 @@
+// header-bar-list-submenu.less
+@import './base.less';
+
+div.header-bar-list-submenu {
+    display: inline-block;
+    position: absolute;
+    border-radius: 2px;
+    padding: 5px 15px;
+    right: 0px; top: 0px;
+    background-color: rgb(221, 221, 221);
+    color: black;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+    cursor: default;
+    &::before {
+        content: '';
+        position: absolute;
+        top: -0.6em; right: 1.2em;
+        border-right: 0.6em solid rgba(225, 225, 225, 0);
+        border-left: 0.6em solid rgba(225, 225, 225, 0);
+        border-bottom: 0.6em solid rgb(221, 221, 221);
+    }
+    div.header-bar-list-submenu-header { border-bottom: 1px solid black; }
+    div.header-bar-list-submenu-footer { border-top: 1px solid black; }
+    div.header-bar-list-submenu-item { padding: 0.8em 1em; }
+}

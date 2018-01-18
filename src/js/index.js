@@ -4,6 +4,8 @@ import React from 'react';
 import ResizeSensor from 'css-element-queries/src/ResizeSensor';
 import HeaderBarNavItem from './HeaderBarNavItem.js';
 import HeaderBarSubnavItem from './HeaderBarSubnavItem.js';
+import HeaderBarSubmenu from './HeaderBarSubmenu.js';
+import HeaderBarListSubmenu from './HeaderBarListSubmenu.js';
 
 import '../css/index.less';
 
@@ -100,6 +102,7 @@ class HeaderBar extends React.Component {
         const subnavs = children.filter(child => { return child.props['data-subnav']; });
         const buttons = children.filter(child => { return child.props['data-submenu_button'] || child.props['data-button']; });
         const submenuButttons = children.filter(child => { return child.props['data-submenu_button']; });
+        const usingSubmenuButtton = submenuButttons.filter(button => submenuOpenKey === button.props['data-submenu_key'])[0];
         const submenuItems = children
             .filter(child => {
                 return child.props['data-submenu_item'] && submenuOpenKey === child.props['data-submenu_key'];
@@ -111,6 +114,19 @@ class HeaderBar extends React.Component {
             }, {header: [], body: [], footer: []});
         const smallHeaderBarClassName = shouldDisplaySmallStyle ? ' header-bar-small' : '';
         const navOpacityClassName = isDisplayStyleUpdated ? '' : ' header-bar-transparent';
+        let submenu = undefined;
+        if(!!usingSubmenuButtton) {
+            if('list' === usingSubmenuButtton.props['data-submenu_type']) {
+                submenu = <HeaderBarListSubmenu bodyItems={submenuItems.body} style={{right: submenuRight}} />;
+            } else {
+                submenu = <HeaderBarSubmenu
+                    headerItems={submenuItems.header}
+                    bodyItems={submenuItems.body}
+                    footerItems={submenuItems.footer}
+                    style={{right: submenuRight}}
+                />;
+            }
+        }
         return <div className={`header-bar${smallHeaderBarClassName}${navOpacityClassName}`} style={style}>
             {(propsLogo && !childLogo) && <img
                 className={'header-bar-logo ' + propsLogo.className} {...propsLogo}
@@ -139,25 +155,7 @@ class HeaderBar extends React.Component {
                     </div>;
                 }
             })}
-            {isSubmenuOpen && <div className='header-bar-submenu-wrapper' onClick={this.closeSubmenuFromWrapper}>
-                <div className='header-bar-submenu' style={{right: submenuRight}}>
-                    {!!submenuItems.header.length && <div className='header-bar-submenu-header' >
-                        {submenuItems.header.map((submenuItem, index) => {
-                            return <div className='header-bar-submenu-item' key={index}>{submenuItem}</div>;
-                        })}
-                    </div>}
-                    <div className='header-bar-submenu-body' >
-                        {submenuItems.body.map((submenuItem, index) => {
-                            return <div className='header-bar-submenu-item' key={index}>{submenuItem}</div>;
-                        })}
-                    </div>
-                    {!!submenuItems.footer.length && <div className='header-bar-submenu-footer' >
-                        {submenuItems.footer.map((submenuItem, index) => {
-                            return <div className='header-bar-submenu-item' key={index}>{submenuItem}</div>;
-                        })}
-                    </div>}
-                </div>
-            </div>}
+            {isSubmenuOpen && <div className='header-bar-submenu-wrapper' onClick={this.closeSubmenuFromWrapper}>{submenu}</div>}
             <div className='header-bar-collapse'>
                 <div className='header-bar-collapse-placeholder'></div>
                 {buttons.map((button, index) => {
