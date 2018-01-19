@@ -5,15 +5,22 @@ import HeaderBar from '../../../../src/js/index.js';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import Logo from '../img/logo.svg';
+import Hamburger from '../img/hamburger.svg';
+import MenuCloser from '../img/x.svg';
+import FacebookIcon from '../img/facebook.svg';
+import YoutubeIcon from '../img/youtube.svg';
+import LineIcon from '../img/line.svg';
+
 var onReadyStateChange = function onReadyStateChange(e) {
     if(document.readyState == 'complete') {
         ReactDOM.render(
             <div className='header'>
                 <HeaderBar
-                    hamburger={{ src:'/img/hamburger.svg', title:'Menu' }}
-                    menuCloser={{ src:'/img/hamburger.svg', title:'Close menu' }}
+                    hamburger={{src: Hamburger, title: 'Menu'}}
+                    menuCloser={{src: MenuCloser, title: 'Close menu'}}
                 >
-                    <a href='//tw.pbplus.me' data-logo={true}><img src='/img/logo.svg' title='Home'/></a>
+                    <a href='//tw.pbplus.me' data-logo={true}><img src={Logo} title='Home'/></a>
                     {[
                         <a
                             key='0' href='//media.pbplus.me'
@@ -29,11 +36,11 @@ var onReadyStateChange = function onReadyStateChange(e) {
                         <a key='3' href='//localhost' data-nav={true} data-color='rgb(226, 147, 192)' data-match='local(.*)'>圓夢</a>,
                         <a key='4' href='//localhost' data-nav={true} data-color='rgb(66, 169, 140)' data-match='ticket'>購票</a>
                     ]}
-                    <a href='//facebook.com' data-subnav={true} data-color='rgb(62, 86, 155)'><img src='/img/facebook.svg'/></a>
-                    <a href='//youtube.com' data-subnav={true} data-color='rgb(229, 26, 0)'><img src='/img/youtube.svg'/></a>
-                    <a href='//timeline.line.me' data-subnav={true} data-color='rgb(0, 181, 9)'><img src='/img/line.svg'/></a>
+                    <a href='//facebook.com' data-subnav={true} data-color='rgb(62, 86, 155)'><img src={FacebookIcon}/></a>
+                    <a href='//youtube.com' data-subnav={true} data-color='rgb(229, 26, 0)'><img src={YoutubeIcon}/></a>
+                    <a href='//timeline.line.me' data-subnav={true} data-color='rgb(0, 181, 9)'><img src={LineIcon}/></a>
                     <div data-submenu_button={true} data-submenu_key='login'>
-                        <img src='/img/line.svg' style={{height: '1.8em', borderRadius: '0.9em'}} />
+                        <img src={LineIcon} style={{height: '1.8em', borderRadius: '0.9em'}} />
                         <span title='login'>Bill</span>
                     </div>
                     <div data-button={true} ><span>按鈕</span></div>

@@ -6,8 +6,7 @@
   "scripts": {
     "rmdist": "rimraf dist",
     "buildjs": "babel src -d dist --ignore .test.js && cross-env NODE_ENV=production webpack -p --progress",
-    "buildcss": "lessc src/client/css/index.less dist/client/css/index.css",
-    "build": "npm run rmdist && npm run buildjs && npm run buildcss",
+    "build": "npm run rmdist && npm run buildjs",
     "start": "npm run build && cross-env NODE_ENV=production node dist/server",
     "devserver": "babel-node src/server",
     "devserver:auto": "nodemon --ignore dist --exec babel-node src/server",

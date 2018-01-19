@@ -17,7 +17,6 @@ const renderApp = `
             <meta name="viewport" content="initial-scale=1.0">
             <title>pb+ login</title>
             ${isProd ? '<link rel="stylesheet" href="/css/main.css"/>' : ''}
-            ${isProd ? '<link rel="stylesheet" href="/css/index.css"/>' : ''}
         </head>
         <body style='background-color: gray;'>
             <div id="app-root"></div>
