@@ -13,15 +13,31 @@
     }
     nav.header-bar-nav { display: none; }
     nav.header-bar-subnav { display: none; }
-    div.header-bar-submenu-group { display: none; }
+    div.header-bar-submenu-button, div.header-bar-button { display: none; }
     div.header-bar-collapse {
         display: flex;
         flex: auto;
         text-align: right;
         div.header-bar-collapse-placeholder { flex: auto; }
+        div.header-bar-collapse-submenu-button, div.header-bar-collapse-button {
+            padding: 0px 10px;
+            font-size: 14px;
+            height: 100%;
+            cursor: pointer;
+            transition: background-color .6s ease;
+            &.header-bar-open { background-color: dimgray; }
+            * { line-height: @headerBarHeight; }
+            img {
+                border-radius: 2px;
+                width: auto; height: 1.2em;
+                margin-right: 5px;
+                vertical-align: middle;
+            }
+        }
         img.header-bar-collapse-hamburger {
             flex: none;
             width: 25px;
+            padding-left: 10px;
             cursor: pointer;
         }
         div.header-bar-collapse-hamburger {
@@ -62,21 +78,6 @@
                 align-items: center;
                 border-bottom: 5px solid rgb(221, 221, 221);
                 height: @headerBarHeight;
-                div.header-bar-collapse-menu-submenu-buttons {
-                    flex: auto;
-                    div.header-bar-collapse-menu-submenu-button {
-                        display: inline-block;
-                        margin-right: 10px;
-                        font-size: 14px;
-                        cursor: pointer;
-                        img {
-                            border-radius: 2px;
-                            width: auto; height: 1.2em;
-                            margin-right: 5px;
-                            vertical-align: middle;
-                        }
-                    }
-                }
                 div.header-bar-collapse-menu-closer {
                     flex: none;
                     margin-left: auto;
@@ -91,22 +92,6 @@
                     margin-left: auto;
                     margin-right: 20px;
                     cursor: pointer;
-                }
-            }
-            div.header-bar-collapse-menu-submenu-wrapper {
-                flex: 0;
-                position: relative;
-                height: 0px;
-                overflow: scroll;
-                transition: height .6s ease;
-                div.header-bar-collapse-menu-submenu {
-                    position: absolute;
-                    width: 100%;
-                    background-color: rgb(221, 221, 221);
-                    padding: 0px 15px;
-                    color: black;
-                    font-size: 14px;
-                    font-weight: 500;
                 }
             }
             nav.header-bar-collapse-menu-nav {

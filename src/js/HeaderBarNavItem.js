@@ -1,6 +1,7 @@
 // HeaderBarNavItem.js
 'use strict';
 import React from 'react';
+import '../css/header-bar-nav-item.less';
 
 class HeaderBarNavItem extends React.Component {
     constructor(props) {
