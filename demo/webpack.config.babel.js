@@ -11,7 +11,7 @@ export default {
     ],
     output: {
         filename: 'js/bundle.js',
-        path: `${__dirname}/dist/`,
+        path: `${__dirname}/dist/client/`,
         publicPath: isProd ? `/` : `http://localhost:${WDS_PORT}/`,
     },
     module: {
