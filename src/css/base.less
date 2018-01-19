@@ -1,0 +1,28 @@
+// base.less
+@headerBarHeight: 40px;
+.animation(@name, @duration: 3s, @delay: 0s, @ease: ease-out) {
+    -webkit-animation: @name @duration @ease @delay;
+    -moz-animation:    @name @duration @ease @delay;
+    -ms-animation:     @name @duration @ease @delay;
+    -o-animation:     @name @duration @ease @delay;
+    animation:     @name @duration @ease @delay;
+}
+.keyframes (@name, @rules) {
+    @-webkit-keyframes ~'@{name}' { @rules(); }
+    @-moz-keyframes ~'@{name}' { @rules(); }
+    @-ms-keyframes ~'@{name}' { @rules(); }
+    @-o-keyframes ~'@{name}' { @rules(); }
+    @keyframes ~'@{name}' { @rules(); }
+}
+.keyframes(fadeInHalf, {
+    0% { opacity: 0; }
+    100% { opacity: 0.5; }
+});
+.keyframes(fadeIn, {
+    0% { top: -15px; opacity: 0; }
+    100% { top: 0px; opacity: 1; }
+});
+.keyframes(submenuFadeIn, {
+    0% { right: -15px; opacity: 0; }
+    100% { right: 0px; opacity: 1; }
+});

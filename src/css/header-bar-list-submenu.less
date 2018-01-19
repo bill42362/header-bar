@@ -1,0 +1,71 @@
+// header-bar-list-submenu.less
+@import './base.less';
+@backgroundColor: rgb(125, 125, 125);
+@headerBackgroundColor: rgb(206, 206, 206);
+
+div.header-bar-list-submenu {
+    display: inline-block;
+    position: absolute;
+    border-radius: 2px;
+    border: 1px solid @headerBackgroundColor;
+    right: 0px; top: 0px;
+    width: 320px;
+    background-color: @backgroundColor;
+    color: black;
+    font-weight: 500;
+    cursor: default;
+    &::before {
+        content: '';
+        position: absolute;
+        top: -0.6em; right: 1.2em;
+        border-right: 0.6em solid rgba(225, 225, 225, 0);
+        border-left: 0.6em solid rgba(225, 225, 225, 0);
+        border-bottom: 0.6em solid @headerBackgroundColor;
+    }
+    div.header-bar-list-submenu-header {
+        display: flex;
+        background-color: @headerBackgroundColor;
+        padding: 0.5em 1em;
+        font-size: 14px;
+        font-weight: 800;
+        div.header-bar-list-submenu-item { flex: auto; }
+        img.header-bar-list-submenu-header-close-button { display: none; }
+    }
+    div.header-bar-list-submenu-body {
+        div.header-bar-list-submenu-item {
+            border-top: 1px solid @headerBackgroundColor;
+            padding: 1em 1em;
+            font-size: 12px;
+            color: white;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    div.header-bar-list-submenu {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        top: 20px;
+        right: auto !important;
+        margin: auto;
+        width: 80%;
+        max-width: 480px;
+        max-height: calc(~"100%" - 40px);
+        &::before { display: none; }
+        div.header-bar-list-submenu-header {
+            flex: none;
+            img.header-bar-list-submenu-header-close-button {
+                flex: none;
+                display: block;
+                height: 20px;
+                width: auto;
+                cursor: pointer;
+            }
+        }
+        div.header-bar-list-submenu-body {
+            flex: auto;
+            overflow: auto;
+        }
+    }
+}
