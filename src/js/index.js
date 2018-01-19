@@ -121,6 +121,7 @@ class HeaderBar extends React.Component {
                     headerItem={submenuItems.header[0]}
                     bodyItems={submenuItems.body}
                     style={{right: submenuRight}}
+                    close={this.closeSubmenu}
                 />;
             } else {
                 submenu = <HeaderBarSubmenu
