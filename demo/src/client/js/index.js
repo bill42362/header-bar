@@ -52,8 +52,14 @@ var onReadyStateChange = function onReadyStateChange(e) {
                     <div data-submenu_item={true}  data-submenu_key='login' data-submenu_position='footer'>
                         <a href='/logout' title='Logout'>登出</a>
                     </div>
+                    <div data-submenu_item={true} data-submenu_key='board' data-submenu_position='header'>
+                        <div>公告</div>
+                    </div>
                     <div data-submenu_item={true} data-submenu_key='board'>
                         <a href='/pay-history' title='Pay History'>購買紀錄</a>
+                    </div>
+                    <div data-submenu_item={true} data-submenu_key='board'>
+                        <span title='board'>紅利點數即將在 12/31 到期，請您儘速兌換</span>
                     </div>
                 </HeaderBar>
             </div>,

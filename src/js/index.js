@@ -117,7 +117,11 @@ class HeaderBar extends React.Component {
         let submenu = undefined;
         if(!!usingSubmenuButtton) {
             if('list' === usingSubmenuButtton.props['data-submenu_type']) {
-                submenu = <HeaderBarListSubmenu bodyItems={submenuItems.body} style={{right: submenuRight}} />;
+                submenu = <HeaderBarListSubmenu
+                    headerItem={submenuItems.header[0]}
+                    bodyItems={submenuItems.body}
+                    style={{right: submenuRight}}
+                />;
             } else {
                 submenu = <HeaderBarSubmenu
                     headerItems={submenuItems.header}
