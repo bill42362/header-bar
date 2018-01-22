@@ -6,10 +6,19 @@ import '../css/header-bar-list-submenu.less';
 import CloseIcon from '../img/close_icon.png';
 
 class HeaderBarListSubmenu extends React.Component {
-    constructor(props) { super(props); }
+    constructor(props) {
+        super(props);
+        this.onWindowScroll = this.onWindowScroll.bind(this);
+    }
+    onWindowScroll(e) {
+        const baseRect = this.base.getBoundingClientRect();
+        if(0 > baseRect.bottom) { this.props.close(); }
+    }
+    componentDidMount() { window.addEventListener('scroll', this.onWindowScroll, false); }
+    componentWillUnmount() { window.removeEventListener('scroll', this.onWindowScroll, false); }
     render() {
         const { headerItem, bodyItems, style, close } = this.props;
-        return <div className='header-bar-list-submenu' style={style}>
+        return <div className='header-bar-list-submenu' style={style} ref={base => { this.base = base; }}>
             <div className='header-bar-list-submenu-header' >
                 <div className='header-bar-list-submenu-item' >{headerItem}</div>
                 <img

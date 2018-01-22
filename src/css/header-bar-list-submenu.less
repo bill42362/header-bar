@@ -4,12 +4,14 @@
 @headerBackgroundColor: rgb(206, 206, 206);
 
 div.header-bar-list-submenu {
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
     position: absolute;
     border-radius: 2px;
     border: 1px solid @headerBackgroundColor;
     right: 0px; top: 0px;
     width: 320px;
+    max-height: calc(~"50%" - @headerBarHeight);
     background-color: @backgroundColor;
     color: black;
     font-weight: 500;
@@ -23,6 +25,7 @@ div.header-bar-list-submenu {
         border-bottom: 0.6em solid @headerBackgroundColor;
     }
     div.header-bar-list-submenu-header {
+        flex: none;
         display: flex;
         background-color: @headerBackgroundColor;
         padding: 0.5em 1em;
@@ -32,6 +35,8 @@ div.header-bar-list-submenu {
         img.header-bar-list-submenu-header-close-button { display: none; }
     }
     div.header-bar-list-submenu-body {
+        flex: auto;
+        overflow: auto;
         div.header-bar-list-submenu-item {
             border-top: 1px solid @headerBackgroundColor;
             padding: 1em 1em;
@@ -43,18 +48,15 @@ div.header-bar-list-submenu {
 
 @media (max-width: 767px) {
     div.header-bar-list-submenu {
-        display: flex;
-        flex-direction: column;
         position: relative;
         top: 20px;
         right: auto !important;
         margin: auto;
         width: 80%;
         max-width: 480px;
-        max-height: calc(~"100%" - 40px);
+        max-height: calc(~"50%" - 40px);
         &::before { display: none; }
         div.header-bar-list-submenu-header {
-            flex: none;
             img.header-bar-list-submenu-header-close-button {
                 flex: none;
                 display: block;
@@ -62,10 +64,6 @@ div.header-bar-list-submenu {
                 width: auto;
                 cursor: pointer;
             }
-        }
-        div.header-bar-list-submenu-body {
-            flex: auto;
-            overflow: auto;
         }
     }
 }
