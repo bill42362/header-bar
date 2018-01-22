@@ -18,7 +18,7 @@ const renderApp = `
             <title>pb+ login</title>
             ${isProd ? '<link rel="stylesheet" href="/css/main.css"/>' : ''}
         </head>
-        <body style='background-color: gray;'>
+        <body style='background-color: dimgray; height: 200vh;'>
             <div id="app-root"></div>
             <script type='text/javascript' src="${isProd ? `/js/bundle.js` : `http://localhost:7000/js/bundle.js`}" ></script>
         </body>
